@@ -27,8 +27,6 @@
             border-radius: 8px !important;
             color: #fff !important;
         }
-        .goog-te-banner-frame { display: none !important; }
-        body { top: 0 !important; }
     </style>
 </head>
 <body class="min-h-screen bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900 via-slate-950 to-black">
@@ -38,16 +36,17 @@
             <div class="w-8 h-8 bg-sky-500 rounded-lg flex items-center justify-center font-bold text-black">P</div>
             <span class="text-xl font-black tracking-tighter uppercase tracking-widest">PolyAxiom</span>
         </div>
-        
         <div class="flex items-center">
-            <span class="text-[10px] text-slate-500 mr-2 uppercase">Translate:</span>
             <div id="google_translate_element"></div>
         </div>
     </nav>
 
     <main class="max-w-6xl mx-auto px-6 py-10">
         <div id="signals-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-center md:text-left">
-            <div class="text-slate-500 col-span-full py-20 text-center">正在同步全球预测市场信号...</div>
+            <div class="text-slate-500 col-span-full py-20 text-center">
+                <div class="inline-block animate-spin mb-4">⌛</div>
+                <p>正在同步全球预测市场信号...</p>
+            </div>
         </div>
     </main>
 
@@ -64,60 +63,5 @@
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     <script>
-        // 配置信息
-        const SUPABASE_URL = 'https://mqitovjowfayunujvpgn.supabase.co'; 
-        const SUPABASE_ANON_KEY = 'sb_publishable_JvLqRPVcS7xpHT-TNatAtQ_xRr6JhkD'; 
-        
-        const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-        async function fetchSignals() {
-            const container = document.getElementById('signals-container');
-            
-            try {
-                // 从 alpha_signals 表获取数据
-                const { data, error } = await _supabase
-                    .from('alpha_signals')
-                    .select('*')
-                    .order('created_at', { ascending: false });
-
-                if (error) {
-                    throw error;
-                }
-
-                if (!data || data.length === 0) {
-                    container.innerHTML = `<div class="text-slate-500 col-span-full py-20 text-center">暂无活跃信号，AI 正在扫描中...</div>`;
-                    return;
-                }
-
-                container.innerHTML = data.map(item => `
-                    <div class="p-6 rounded-2xl glass-card flex flex-col h-full text-left">
-                        <div class="flex-grow">
-                            <span class="inline-block px-2 py-1 rounded-md bg-sky-500/10 text-sky-400 text-[10px] font-bold uppercase mb-4 tracking-wider font-mono">Signal Live</span>
-                            <h2 class="text-lg font-bold leading-tight mb-4 text-slate-100 notranslate">
-                                ${item.title}
-                            </h2>
-                            <div class="text-slate-400 text-sm leading-relaxed mb-8 border-l-2 border-slate-700 pl-4 py-1 italic">
-                                ${item.ai_summary || 'AI 正在深度分析逻辑...'}
-                            </div>
-                        </div>
-                        <a href="${item.referral_link}" target="_blank" class="w-full py-3 px-4 bg-sky-600 hover:bg-sky-500 text-white text-sm font-bold rounded-xl transition-all text-center shadow-lg shadow-sky-900/20 active:scale-95">
-                            立即参与预测 (GET REWARD)
-                        </a>
-                    </div>
-                `).join('');
-
-            } catch (err) {
-                console.error('连接失败详情:', err);
-                container.innerHTML = `
-                    <div class="text-red-400 text-sm col-span-full py-20 text-center">
-                        <p class="mb-2">⚠️ 连接数据库失败</p>
-                        <p class="text-[10px] opacity-50">错误原因: ${err.message || '网络连接被拦截或域名无法解析'}</p>
-                        <button onclick="location.reload()" class="mt-4 text-xs underline opacity-70">重试刷新</button>
-                    </div>`;
-            }
-        }
-
-        fetchSignals();
-    </script>
-</body>
-</html>
+        // 注意：网页端必须使用 Anon Key，严禁使用 Service Role Key
+        const SUPABASE_URL = '
