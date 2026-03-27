@@ -2,18 +2,22 @@ name: PolyAxiom Auto Scanner
 
 on:
   schedule:
-    - cron: '0 * * * *' # 每小时自动运行一次
+    - cron: '0 * * * *' # 每小时运行一次
   workflow_dispatch:      # 允许手动触发
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    # 这一步是核心：显式声明权限
     permissions:
-      contents: write    # 必须开启，否则无法推送 data.json
+      contents: write
     
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
+        with:
+          # 加入这个 Token 确保有权限推送回仓库
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -28,8 +32,9 @@ jobs:
 
       - name: Commit and Push Data
         run: |
-          git config --global user.name "PolyAxiom-Bot"
-          git config --global user.email "bot@polyaxiom.com"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add data.json
+          # 如果没有变化则不报错退出
           git commit -m "自动更新实时信号" || exit 0
-          git push
+          git push origin main
