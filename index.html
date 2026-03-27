@@ -4,25 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title id="site-title">PolyAxiom - Polymarket 实时高胜率信号监控 | 聚焦链上叙事与预测市场</title>
-    <meta name="description" id="meta-description" content="专业的 Polymarket 实时高胜率信号监控平台，聚合全网最新预测市场动态，助你捕捉 Web3 每一个机会。">
-    <meta name="keywords" content="Polymarket, 预测市场, Web3, 信号监控, 胜率分析, PolyAxiom, 链上数据, FIFA World Cup, GTA VI">
-    <link rel="canonical" href="https://你的域名/">
+    <title>PolyAxiom - Polymarket 实时高胜率信号监控</title>
+    <meta name="description" id="meta-description" content="聚焦 Polymarket 实时高胜率信号，捕捉预测市场每一个机会。">
+    <meta name="keywords" content="Polymarket, 预测市场, Web3, 信号监控, 胜率分析, PolyAxiom">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@Poly_Axiom">
     <meta name="twitter:title" content="PolyAxiom | 实时高胜率信号监控">
-    <meta name="twitter:description" content="聚焦 Polymarket 实时数据，助你捕捉预测市场每一个高胜率机会。">
-    <meta name="twitter:image" content="https://你的域名/logo.png"> <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "PolyAxiom",
-      "url": "https://你的域名/",
-      "description": "专业的 Polymarket 实时高胜率信号监控工具",
-      "applicationCategory": "FinanceApplication"
-    }
-    </script>
+    <meta name="twitter:image" content="https://polyaxiom.com/logo.png">
 
     <style>
         :root {
@@ -38,7 +27,7 @@
         body {
             background-color: var(--bg);
             color: var(--text);
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
             margin: 0;
             padding: 20px;
             display: flex;
@@ -48,26 +37,21 @@
 
         header {
             text-align: center;
-            margin-bottom: 25px; /* 收紧头部间距，减少空旷感 */
+            margin-bottom: 25px;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
         .logo-container img {
-            max-width: 130px; /* 完美精致比例 */
+            max-width: 130px; /* 锁定 130px 最美比例 */
             height: auto;
             display: block;
-            filter: drop-shadow(0 0 10px rgba(88, 166, 255, 0.2));
+            filter: drop-shadow(0 0 8px rgba(88, 166, 255, 0.2));
             margin-bottom: 8px;
         }
 
-        header p {
-            font-size: 13px;
-            color: var(--text-dim);
-            margin: 0;
-            letter-spacing: 0.8px;
-        }
+        header p { font-size: 13px; color: var(--text-dim); margin: 0; letter-spacing: 0.8px; }
 
         .container {
             max-width: 1200px;
@@ -82,23 +66,15 @@
             border: 1px solid #30363d;
             border-radius: 10px;
             padding: 20px;
-            transition: transform 0.2s, border-color 0.2s;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            transition: transform 0.2s;
         }
 
-        .card:hover {
-            transform: translateY(-3px);
-            border-color: #444c56;
-        }
+        .card:hover { transform: translateY(-3px); border-color: #444c56; }
 
-        .category {
-            font-size: 11px;
-            color: var(--link);
-            text-transform: uppercase;
-            margin-bottom: 8px;
-        }
+        .category { font-size: 11px; color: var(--link); text-transform: uppercase; margin-bottom: 8px; }
 
         .title {
             font-size: 16px;
@@ -106,7 +82,7 @@
             color: var(--text-bright);
             margin-bottom: 15px;
             line-height: 1.4;
-            min-height: 44px; /* 保持卡片高度整齐 */
+            min-height: 44px; /* 统一卡片高度 */
         }
 
         .stats {
@@ -128,10 +104,7 @@
             text-decoration: none;
             font-weight: 600;
             font-size: 14px;
-            transition: opacity 0.2s;
         }
-
-        .btn:hover { opacity: 0.9; }
 
         footer {
             margin-top: 60px;
@@ -173,7 +146,7 @@
     </div>
 
 <footer>
-    <div>© 2026 PolyAxiom | 聚焦链上叙事与预测市场</div>
+    <div>© 2026 PolyAxiom | 聚焦预测市场动态</div>
     <div class="footer-links">
         <a href="https://t.me/PolyAxiom_ZH" target="_blank">✈️ Telegram</a>
         <a href="https://x.com/Poly_Axiom" target="_blank">𝕏 Twitter</a>
@@ -183,13 +156,10 @@
 <script>
     async function loadSignals() {
         try {
-            const response = await fetch('data.json?v=' + Date.now()); // 使用时间戳跳过缓存
+            const response = await fetch('data.json?v=' + Date.now()); // 强制跳过缓存
             const data = await response.json();
             const list = document.getElementById('signals-list');
             
-            if (!data.length) throw new Error();
-
-            // 1. 渲染卡片 HTML
             list.innerHTML = data.map(item => `
                 <div class="card">
                     <div>
@@ -204,17 +174,17 @@
                 </div>
             `).join('');
 
-            // 2. 核心 SEO 自动更新：将前 5 个高热度话题写进 Meta Description 中
-            const topTitles = data.slice(0, 5).map(item => item.title).join(', ');
-            document.getElementById('meta-description').content = `PolyAxiom 正在实时监控最火预测市场：${topTitles}... 获取 Polymarket 最新高胜率机会。`;
-
+            // 动态更新 SEO 描述，抓取前 3 个热门标题
+            const topTitles = data.slice(0, 3).map(item => item.title).join(', ');
+            document.getElementById('meta-description').content = `PolyAxiom 正在监控：${topTitles}... 获取 Polymarket 最新高胜率信号。`;
+            
         } catch (e) {
             document.getElementById('signals-list').innerHTML = 
-                '<p style="grid-column: 1/-1; text-align:center; color: var(--text-dim);">数据同步中，请刷新页面...</p>';
+                '<p style="grid-column: 1/-1; text-align:center;">同步中，请刷新...</p>';
         }
     }
     loadSignals();
-    setInterval(loadSignals, 60000); // 每一分钟尝试刷新前端数据
+    setInterval(loadSignals, 60000); // 每分钟前端静默刷新
 </script>
 
 </body>
