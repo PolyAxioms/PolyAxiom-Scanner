@@ -8,10 +8,11 @@
         :root {
             --bg: #0a0e17;
             --card-bg: #161b22;
-            --accent: #238636; /* 绿色系主色调 */
+            --accent: #238636;
             --text: #adbac7;
             --text-bright: #ffffff;
             --text-dim: #768390;
+            --link: #58a6ff;
         }
 
         body {
@@ -19,7 +20,7 @@
             color: var(--text);
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
             margin: 0;
-            padding: 20px; /* 缩减顶部内边距 */
+            padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -27,32 +28,32 @@
 
         header {
             text-align: center;
-            margin-bottom: 30px; /* 关键：收紧头部与卡片的间距 */
+            margin-bottom: 25px; /* 收紧头部间距 */
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
         .logo-container img {
-            max-width: 180px; /* 关键：缩小 Logo 尺寸，更显精致 */
+            max-width: 130px; /* 关键：调小到 130px 比例最舒适 */
             height: auto;
             display: block;
-            filter: drop-shadow(0 0 10px rgba(88, 166, 255, 0.2));
-            margin-bottom: 10px; /* 缩短 Logo 与副标题距离 */
+            filter: drop-shadow(0 0 8px rgba(88, 166, 255, 0.2));
+            margin-bottom: 8px;
         }
 
         header p {
-            font-size: 14px;
+            font-size: 13px;
             color: var(--text-dim);
             margin: 0;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.8px;
         }
 
         .container {
             max-width: 1200px;
             width: 100%;
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 16px;
         }
 
@@ -74,18 +75,18 @@
 
         .category {
             font-size: 11px;
-            color: #58a6ff;
+            color: var(--link);
             text-transform: uppercase;
             margin-bottom: 8px;
         }
 
         .title {
-            font-size: 17px;
+            font-size: 16px;
             font-weight: 600;
             color: var(--text-bright);
             margin-bottom: 15px;
             line-height: 1.4;
-            min-height: 48px;
+            min-height: 44px;
         }
 
         .stats {
@@ -96,7 +97,7 @@
         }
 
         .odds-label { font-size: 11px; color: var(--text-dim); margin-bottom: 4px; }
-        .odds-value { font-size: 22px; font-weight: bold; color: #58a6ff; }
+        .odds-value { font-size: 22px; font-weight: bold; color: var(--link); }
 
         .btn {
             background: var(--accent);
@@ -115,11 +116,11 @@
         footer {
             margin-top: 50px;
             padding-bottom: 30px;
-            font-size: 13px;
+            font-size: 12px;
             color: var(--text-dim);
         }
 
-        footer a { color: #58a6ff; text-decoration: none; }
+        footer a { color: var(--link); text-decoration: none; }
     </style>
 </head>
 <body>
@@ -141,11 +142,11 @@
 <script>
     async function loadSignals() {
         try {
-            const response = await fetch('data.json?t=' + new Date().getTime());
+            const response = await fetch('data.json?v=' + Date.now());
             const data = await response.json();
             const list = document.getElementById('signals-list');
             
-            if (!data || data.length === 0) throw new Error();
+            if (!data.length) throw new Error();
 
             list.innerHTML = data.map(item => `
                 <div class="card">
@@ -162,11 +163,11 @@
             `).join('');
         } catch (e) {
             document.getElementById('signals-list').innerHTML = 
-                '<p style="text-align:center; grid-column: 1/-1; color: #f85149;">数据同步中，请稍后刷新...</p>';
+                '<p style="grid-column: 1/-1; text-align:center; color: var(--text-dim);">数据同步中，请刷新页面...</p>';
         }
     }
     loadSignals();
-    setInterval(loadSignals, 60000); // 每一分钟尝试刷新前端数据
+    setInterval(loadSignals, 60000);
 </script>
 
 </body>
