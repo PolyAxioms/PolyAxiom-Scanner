@@ -3,88 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PolyAxiom | 预测市场 Alpha 导航</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <title>PolyAxiom | 预测市场实时信号</title>
     <style>
-        body { background-color: #020617; color: #f8fafc; font-family: system-ui, -apple-system, sans-serif; }
-        .glass-card { 
-            background: rgba(30, 41, 59, 0.7); 
-            border: 1px solid rgba(51, 65, 85, 0.5); 
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
+        :root {
+            --bg-color: #0a0e17;
+            --card-bg: #161b22;
+            --text-main: #ffffff;
+            --text-dim: #8b949e;
+            --accent: #58a6ff;
         }
-        .glass-card:hover { border-color: #38bdf8; transform: translateY(-4px); }
-    </style>
-</head>
-<body class="min-h-screen bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900 via-slate-950 to-black">
 
-    <nav class="max-w-6xl mx-auto p-6 flex justify-between items-center border-b border-slate-800/50">
-        <div class="flex items-center gap-2">
-            <div class="w-8 h-8 bg-sky-500 rounded-lg flex items-center justify-center font-bold text-black">P</div>
-            <span class="text-xl font-black tracking-tighter uppercase">PolyAxiom</span>
-        </div>
-        <div id="google_translate_element"></div>
-    </nav>
-
-    <main class="max-w-6xl mx-auto px-6 py-10">
-        <div id="signals-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div class="text-slate-500 col-span-full py-20 text-center animate-pulse">
-                ⌛ PolyAxiom 正在同步实时信号...
-            </div>
-        </div>
-    </main>
-
-    <script type="text/javascript">
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({pageLanguage: 'zh-CN', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-    </script>
-    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
-    <script>
-        const SUPABASE_URL = 'https://mqitovjowfayunujvpgn.supabase.co'; 
-        const SUPABASE_ANON_KEY = 'sb_publishable_JvLqRPVcS7xpHT-TNatAtQ_xRr6JhkD'; 
-        
-        const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-        async function fetchSignals() {
-            const container = document.getElementById('signals-container');
-            try {
-                const { data, error } = await _supabase
-                    .from('alpha_signals')
-                    .select('*')
-                    .order('created_at', { ascending: false });
-
-                if (error) throw error;
-
-                if (!data || data.length === 0) {
-                    container.innerHTML = `<div class="text-slate-500 col-span-full py-20 text-center">暂无信号，PolyAxiom AI 正在扫描中...</div>`;
-                    return;
-                }
-
-                container.innerHTML = data.map(item => `
-                    <div class="p-6 rounded-2xl glass-card flex flex-col h-full">
-                        <span class="inline-block w-fit px-2 py-1 rounded-md bg-sky-500/10 text-sky-400 text-[10px] font-bold uppercase mb-4 font-mono">PolyAxiom Signal</span>
-                        <h2 class="text-lg font-bold mb-4 text-slate-100">${item.title}</h2>
-                        <p class="text-slate-400 text-sm mb-8 border-l-2 border-slate-700 pl-4 italic">${item.ai_summary}</p>
-                        <a href="${item.referral_link}" target="_blank" class="mt-auto w-full py-3 bg-sky-600 hover:bg-sky-500 text-white text-sm font-bold rounded-xl text-center transition-all">立即参与预测 (PolyAxiom)</a>
-                    </div>
-                `).join('');
-
-            } catch (err) {
-                container.innerHTML = `
-                    <div class="text-red-400 text-sm col-span-full py-20 text-center glass-card rounded-2xl">
-                        <p class="text-lg mb-4">📡 信号同步超时</p>
-                        <p class="text-slate-500 text-xs mb-6">原因: 本地网络环境受限 (Fetch Error)</p>
-                        <div class="inline-flex gap-4">
-                            <button onclick="location.reload()" class="px-4 py-2 bg-slate-800 rounded-lg">重试</button>
-                            <a href="https://t.me/PolyAxiom" class="px-4 py-2 bg-sky-900/30 text-sky-400 rounded-lg">联系 PolyAxiom 支持</a>
-                        </div>
-                    </div>`;
-            }
+        header {
+            text-align: center;
+            margin-bottom: 40px;
         }
-        fetchSignals();
-    </script>
-</body>
-</html>
+
+        h1 {
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .signal-card {
+            background: var(--card-bg);
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            padding: 20px;
+            transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .signal-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+
+        .category
