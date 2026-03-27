@@ -8,9 +8,10 @@
         :root {
             --bg: #0a0e17;
             --card-bg: #161b22;
-            --accent: #58a6ff;
+            --accent: #238636; /* 绿色系主色调 */
             --text: #adbac7;
             --text-bright: #ffffff;
+            --text-dim: #768390;
         }
 
         body {
@@ -18,7 +19,7 @@
             color: var(--text);
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
             margin: 0;
-            padding: 40px 20px;
+            padding: 20px; /* 缩减顶部内边距 */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -26,15 +27,25 @@
 
         header {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 30px; /* 关键：收紧头部与卡片的间距 */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .logo-container img {
-            max-width: 260px;
+            max-width: 180px; /* 关键：缩小 Logo 尺寸，更显精致 */
             height: auto;
-            /* 给白色 Logo 增加一层淡淡的蓝色科幻光晕 */
-            filter: drop-shadow(0 0 10px rgba(88, 166, 255, 0.3));
-            margin-bottom: 15px;
+            display: block;
+            filter: drop-shadow(0 0 10px rgba(88, 166, 255, 0.2));
+            margin-bottom: 10px; /* 缩短 Logo 与副标题距离 */
+        }
+
+        header p {
+            font-size: 14px;
+            color: var(--text-dim);
+            margin: 0;
+            letter-spacing: 0.5px;
         }
 
         .container {
@@ -42,14 +53,14 @@
             width: 100%;
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
+            gap: 16px;
         }
 
         .card {
             background: var(--card-bg);
             border: 1px solid #30363d;
-            border-radius: 12px;
-            padding: 24px;
+            border-radius: 10px;
+            padding: 20px;
             transition: transform 0.2s, border-color 0.2s;
             display: flex;
             flex-direction: column;
@@ -57,58 +68,58 @@
         }
 
         .card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent);
+            transform: translateY(-3px);
+            border-color: #444c56;
         }
 
         .category {
-            font-size: 12px;
-            color: var(--accent);
+            font-size: 11px;
+            color: #58a6ff;
             text-transform: uppercase;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .title {
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 600;
             color: var(--text-bright);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             line-height: 1.4;
+            min-height: 48px;
         }
 
         .stats {
-            background: rgba(88, 166, 255, 0.1);
+            background: rgba(255, 255, 255, 0.03);
             padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 20px;
+            border-radius: 6px;
+            margin-bottom: 15px;
         }
 
-        .odds-value {
-            font-size: 24px;
-            font-weight: bold;
-            color: var(--accent);
-        }
+        .odds-label { font-size: 11px; color: var(--text-dim); margin-bottom: 4px; }
+        .odds-value { font-size: 22px; font-weight: bold; color: #58a6ff; }
 
         .btn {
-            background: #238636;
+            background: var(--accent);
             color: white;
             text-align: center;
-            padding: 12px;
+            padding: 10px;
             border-radius: 6px;
             text-decoration: none;
             font-weight: 600;
-            transition: background 0.2s;
+            font-size: 14px;
+            transition: opacity 0.2s;
         }
 
-        .btn:hover { background: #2ea043; }
+        .btn:hover { opacity: 0.9; }
 
         footer {
-            margin-top: 60px;
-            font-size: 14px;
-            color: #768390;
+            margin-top: 50px;
+            padding-bottom: 30px;
+            font-size: 13px;
+            color: var(--text-dim);
         }
 
-        footer a { color: var(--accent); text-decoration: none; }
+        footer a { color: #58a6ff; text-decoration: none; }
     </style>
 </head>
 <body>
@@ -130,17 +141,19 @@
 <script>
     async function loadSignals() {
         try {
-            const response = await fetch('data.json');
+            const response = await fetch('data.json?t=' + new Date().getTime());
             const data = await response.json();
             const list = document.getElementById('signals-list');
             
+            if (!data || data.length === 0) throw new Error();
+
             list.innerHTML = data.map(item => `
                 <div class="card">
                     <div>
                         <div class="category">${item.category}</div>
                         <div class="title">${item.title}</div>
                         <div class="stats">
-                            <div style="font-size: 12px; margin-bottom: 4px;">当前胜率</div>
+                            <div class="odds-label">当前胜率</div>
                             <div class="odds-value">${item.odds}%</div>
                         </div>
                     </div>
@@ -148,12 +161,12 @@
                 </div>
             `).join('');
         } catch (e) {
-            document.getElementById('signals-list').innerHTML = '<p style="text-align:center; grid-column: 1/-1;">数据加载中，请稍后刷新...</p>';
+            document.getElementById('signals-list').innerHTML = 
+                '<p style="text-align:center; grid-column: 1/-1; color: #f85149;">数据同步中，请稍后刷新...</p>';
         }
     }
     loadSignals();
-    // 每 5 分钟自动检测一次新数据
-    setInterval(loadSignals, 300000);
+    setInterval(loadSignals, 60000); // 每一分钟尝试刷新前端数据
 </script>
 
 </body>
