@@ -2,40 +2,62 @@ import os
 import requests
 from supabase import create_client
 
-# 1. 强制打印环境检查（不打印具体的 Key，只看存不存在）
+# 1. 获取钥匙
 url = os.environ.get("SUPABASE_URL")
 key = os.environ.get("SUPABASE_KEY")
-
-print(f"--- 检查钥匙 ---")
-print(f"URL 是否存在: {'✅' if url else '❌'}")
-print(f"KEY 是否存在: {'✅' if key else '❌'}")
-print(f"--- 检查结束 ---")
+ds_api_key = os.environ.get("DEEPSEEK_API_KEY")
 
 if not url or not key:
-    raise ValueError("钥匙缺失，请检查 GitHub Settings -> Secrets！")
+    raise ValueError("错误：GitHub Secrets 里的 SUPABASE_URL 或 SUPABASE_KEY 没配置好！")
 
 supabase = create_client(url, key)
 
+def analyze_with_ai(title):
+    """调用 DeepSeek 进行中文解析"""
+    if not ds_api_key:
+        return "点击查看详情分析..."
+    try:
+        headers = {"Authorization": f"Bearer {ds_api_key}", "Content-Type": "application/json"}
+        data = {
+            "model": "deepseek-chat",
+            "messages": [
+                {"role": "system", "content": "你是一个专业的预测市场分析师。"},
+                {"role": "user", "content": f"请用一句话简要分析这个预测市场话题的背景或看点（中文）：{title}"}
+            ]
+        }
+        res = requests.post("https://api.deepseek.com/chat/completions", json=data, headers=headers)
+        return res.json()['choices'][0]['message']['content']
+    except Exception:
+        return "热门预测话题，点击查看实时胜率"
+
 def run_scanner():
-    print("🚀 开始抓取数据...")
+    print("🚀 开始正式扫描 Polymarket...")
+    # 获取最热门的 20 个活跃市场
     response = requests.get("https://gamma-api.polymarket.com/events?active=true&limit=20")
     markets = response.json()
-    print(f"找到 {len(markets)} 个市场")
     
     for m in markets:
         title = m.get('title')
+        slug = m.get('slug')
+        if not title or not slug: continue
+        
+        # 1. 生成 AI 简评
+        ai_msg = analyze_with_ai(title)
+        
+        # 2. 准备存入数据库的数据
         row = {
             "title": title,
-            "odds": 0.5,
-            "ai_summary": "数据同步测试",
-            "referral_link": f"https://polymarket.com/event/{m.get('slug')}?r=PolyAxiom"
+            "odds": 0.5, # 后续可接入实时赔率计算
+            "ai_summary": ai_msg,
+            "referral_link": f"https://polymarket.com/event/{slug}?r=PolyAxiom"
         }
-        # 尝试写入并打印结果
+        
         try:
-            res = supabase.table("alpha_signals").upsert(row, on_conflict="title").execute()
-            print(f"写入成功: {title}")
+            # 存入 Supabase，如果标题重复则更新
+            supabase.table("alpha_signals").upsert(row, on_conflict="title").execute()
+            print(f"✅ 已同步: {title}")
         except Exception as e:
-            print(f"❌ 写入失败: {title}, 原因: {e}")
+            print(f"❌ 写入失败: {e}")
 
 if __name__ == "__main__":
     run_scanner()
