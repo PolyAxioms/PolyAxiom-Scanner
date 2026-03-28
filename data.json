@@ -1,13 +1,5 @@
 [
     {
-        "title": "French Ligue 1 Winner ",
-        "odds": 93.0,
-        "volume": 15593.8,
-        "is_hot": true,
-        "link": "https://polymarket.com/event/french-ligue-1-winner?r=PolyAxiom",
-        "category": "预测市场"
-    },
-    {
         "title": "Bundesliga Winner ",
         "odds": 99.1,
         "volume": 2029.0,
@@ -24,6 +16,14 @@
         "category": "预测市场"
     },
     {
+        "title": "French Ligue 1 Winner ",
+        "odds": 93.0,
+        "volume": 15593.8,
+        "is_hot": false,
+        "link": "https://polymarket.com/event/french-ligue-1-winner?r=PolyAxiom",
+        "category": "预测市场"
+    },
+    {
         "title": "La Liga - Top Goalscorer ",
         "odds": 91.4,
         "volume": 816.6,
@@ -33,7 +33,7 @@
     },
     {
         "title": "Serie A - Top Goalscorer ",
-        "odds": 77.5,
+        "odds": 78.0,
         "volume": 51.1,
         "is_hot": false,
         "link": "https://polymarket.com/event/serie-a-top-goalscorer?r=PolyAxiom",
@@ -58,7 +58,7 @@
     {
         "title": "What will happen before GTA VI?",
         "odds": 54.5,
-        "volume": 19713.5,
+        "volume": 19713.6,
         "is_hot": false,
         "link": "https://polymarket.com/event/what-will-happen-before-gta-vi?r=PolyAxiom",
         "category": "预测市场"
@@ -66,9 +66,17 @@
     {
         "title": "Which party will win the Senate in 2026?",
         "odds": 49.5,
-        "volume": 1276.2,
+        "volume": 1276.7,
         "is_hot": false,
         "link": "https://polymarket.com/event/which-party-will-win-the-senate-in-2026?r=PolyAxiom",
+        "category": "预测市场"
+    },
+    {
+        "title": "Balance of Power: 2026 Midterms",
+        "odds": 48.5,
+        "volume": 4122.3,
+        "is_hot": false,
+        "link": "https://polymarket.com/event/balance-of-power-2026-midterms?r=PolyAxiom",
         "category": "预测市场"
     },
     {
@@ -90,7 +98,7 @@
     {
         "title": "2026 NBA Champion",
         "odds": 36.5,
-        "volume": 205185.7,
+        "volume": 205190.6,
         "is_hot": false,
         "link": "https://polymarket.com/event/2026-nba-champion?r=PolyAxiom",
         "category": "预测市场"
@@ -113,7 +121,7 @@
     },
     {
         "title": "Harvey Weinstein prison time?",
-        "odds": 26.1,
+        "odds": 26.2,
         "volume": 682.0,
         "is_hot": false,
         "link": "https://polymarket.com/event/harvey-weinstein-prison-time?r=PolyAxiom",
@@ -138,7 +146,7 @@
     {
         "title": "2026 FIFA World Cup Winner ",
         "odds": 15.8,
-        "volume": 395450.6,
+        "volume": 395505.2,
         "is_hot": false,
         "link": "https://polymarket.com/event/2026-fifa-world-cup-winner-595?r=PolyAxiom",
         "category": "预测市场"
@@ -186,7 +194,7 @@
     {
         "title": "2026 NHL Stanley Cup Champion ",
         "odds": 11.5,
-        "volume": 57273.9,
+        "volume": 57277.8,
         "is_hot": false,
         "link": "https://polymarket.com/event/2026-nhl-stanley-cup-champion?r=PolyAxiom",
         "category": "预测市场"
@@ -210,17 +218,9 @@
     {
         "title": "UEFA Champions League Winner ",
         "odds": 10.5,
-        "volume": 220308.0,
+        "volume": 220310.0,
         "is_hot": false,
         "link": "https://polymarket.com/event/uefa-champions-league-winner?r=PolyAxiom",
-        "category": "预测市场"
-    },
-    {
-        "title": "BitBoy convicted?",
-        "odds": 10.0,
-        "volume": 265.0,
-        "is_hot": false,
-        "link": "https://polymarket.com/event/bitboy-convicted?r=PolyAxiom",
         "category": "预测市场"
     },
     {
@@ -229,6 +229,14 @@
         "volume": 14047.2,
         "is_hot": false,
         "link": "https://polymarket.com/event/will-china-invade-taiwan-before-2027?r=PolyAxiom",
+        "category": "预测市场"
+    },
+    {
+        "title": "BitBoy convicted?",
+        "odds": 9.3,
+        "volume": 265.0,
+        "is_hot": false,
+        "link": "https://polymarket.com/event/bitboy-convicted?r=PolyAxiom",
         "category": "预测市场"
     },
     {
@@ -242,7 +250,7 @@
     {
         "title": "English Premier League – 3rd Place ",
         "odds": 7.9,
-        "volume": 422.2,
+        "volume": 423.0,
         "is_hot": false,
         "link": "https://polymarket.com/event/english-premier-league-3rd-place?r=PolyAxiom",
         "category": "预测市场"
@@ -265,7 +273,7 @@
     },
     {
         "title": "Ligue 1 - Top Goalscorer ",
-        "odds": 6.1,
+        "odds": 6.5,
         "volume": 72.7,
         "is_hot": false,
         "link": "https://polymarket.com/event/ligue-1-top-goalscorer?r=PolyAxiom",
@@ -282,7 +290,7 @@
     {
         "title": "Augusta National Invitational - Winner ",
         "odds": 5.0,
-        "volume": 59153.8,
+        "volume": 59154.5,
         "is_hot": false,
         "link": "https://polymarket.com/event/augusta-national-invitational-winner?r=PolyAxiom",
         "category": "预测市场"
