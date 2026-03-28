@@ -50,16 +50,16 @@ def fetch_polymarket_data():
                 "is_hot": is_hot,
                 "link": f"https://polymarket.com/event/{event.get('slug', '')}?r=PolyAxiom",
                 "category": event.get('groupItemTitle', '预测市场'),
-                "rand_score": random.random()
+                "rand_score": random.uniform(0, 10) # 增大随机分数范围，强行洗牌
             })
 
-        # --- 修复后的排序逻辑 ---
-        signals.sort(key=lambda x: (x['is_hot'], x['odds'] >= 90, x['odds'], x['rand_score']), reverse=True)
+        # 核心排序：异动必须最前，其他项目加入随机权重让排位更灵动
+        signals.sort(key=lambda x: (x['is_hot'], (x['odds'] // 5), x['rand_score']), reverse=True)
 
         with open('data.json', 'w', encoding='utf-8') as f:
             json.dump(signals[:40], f, ensure_ascii=False, indent=4)
 
-        # Sitemap 逻辑
+        # Sitemap 逻辑...
         sitemap_content = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
         sitemap_content += '  <url><loc>https://polyaxiom.com/</loc><priority>1.0</priority></url>\n'
         for s in signals[:30]:
@@ -68,11 +68,8 @@ def fetch_polymarket_data():
         sitemap_content += '</urlset>'
         with open('sitemap.xml', 'w', encoding='utf-8') as f:
             f.write(sitemap_content)
-            
-        print("✅ 修复成功：动态数据已生成。")
-
-    except Exception as e:
-        print(f"❌ 运行报错: {e}")
+        print("✅ 动态数据生成成功。")
+    except Exception as e: print(f"❌ 报错: {e}")
 
 if __name__ == "__main__":
     fetch_polymarket_data()
