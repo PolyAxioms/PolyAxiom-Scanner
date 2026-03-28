@@ -1,13 +1,12 @@
 import requests
 import json
 import os
+import random # 引入随机数
 
 def fetch_polymarket_data():
-    print("🚀 PolyAxiom 终极高胜率引擎启动...")
-    # 抓取前 100 个事件，确保数据量充足
+    print("🚀 PolyAxiom 动态排序引擎启动...")
     url = "https://gamma-api.polymarket.com/events?limit=100&active=true&closed=false"
 
-    # 1. 加载旧数据用于计算异动
     old_data = {}
     if os.path.exists('data.json'):
         try:
@@ -26,22 +25,18 @@ def fetch_polymarket_data():
             title = event.get('title', '')
             markets = event.get('markets', [])
             if not markets or not title: continue
-            
             m = markets[0]
             try:
                 prices = m.get('outcomePrices')
                 odds_list = json.loads(prices) if isinstance(prices, str) else prices
                 odds = round(float(odds_list[0]) * 100, 1)
-                # 过滤极低胜率噪音，只留干货
                 if odds < 5: continue
             except: continue
 
-            # 交易量补全逻辑
             v24 = float(event.get('volume24h', 0))
             v_event = float(event.get('volume', 0))
             final_vol = max(v24, v_event)
 
-            # 异动检测：赔率波动 >= 5% 或 成交量 >= 5000 刀
             is_hot = False
             if title in old_data:
                 change = abs(odds - old_data[title])
@@ -51,34 +46,29 @@ def fetch_polymarket_data():
             signals.append({
                 "title": title,
                 "odds": odds,
-                "volume": round(final_vol / 1000, 1), # 转换为 k 为单位
+                "volume": round(final_vol / 1000, 1),
                 "is_hot": is_hot,
                 "link": f"https://polymarket.com/event/{event.get('slug', '')}?r=PolyAxiom",
-                "category": event.get('groupItemTitle', '预测市场')
+                "category": event.get('groupItemTitle', '预测市场'),
+                "rand_score": random.random() # 新增：给每个项目一个 0-1 的随机分数
             })
 
-        # 排序权重：异动项目 > 90%胜率 > 普通项目
-        signals.sort(key=lambda x: (x['is_hot'], x['odds'] >= 90, x['odds']), reverse=True)
+    # 这里的排序逻辑改了：异动最前，然后是胜率，最后用随机分数微调顺序
+    signals.sort(key=lambda x: (x['is_hot'], x['odds'] >= 90, x['odds'], x['rand_score']), reverse=True)
 
-        # 写入 data.json (保留前 40 条精英信号)
-        with open('data.json', 'w', encoding='utf-8') as f:
-            json.dump(signals[:40], f, ensure_ascii=False, indent=4)
+    with open('data.json', 'w', encoding='utf-8') as f:
+        json.dump(signals[:40], f, ensure_ascii=False, indent=4)
 
-        # --- SEO 增强：自动生成 Sitemap.xml ---
-        sitemap_content = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-        sitemap_content += '  <url><loc>https://polyaxiom.com/</loc><priority>1.0</priority></url>\n'
-        for s in signals[:30]:
-            safe_link = s['link'].replace('&', '&amp;')
-            sitemap_content += f'  <url><loc>{safe_link}</loc><changefreq>hourly</changefreq></url>\n'
-        sitemap_content += '</urlset>'
-        
-        with open('sitemap.xml', 'w', encoding='utf-8') as f:
-            f.write(sitemap_content)
-            
-        print(f"✅ 更新完成：数据与 Sitemap.xml 已生成。")
-
-    except Exception as e:
-        print(f"❌ 运行报错: {e}")
+    # Sitemap 逻辑保持不变...
+    sitemap_content = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+    sitemap_content += '  <url><loc>https://polyaxiom.com/</loc><priority>1.0</priority></url>\n'
+    for s in signals[:30]:
+        safe_link = s['link'].replace('&', '&amp;')
+        sitemap_content += f'  <url><loc>{safe_link}</loc><changefreq>hourly</changefreq></url>\n'
+    sitemap_content += '</urlset>'
+    with open('sitemap.xml', 'w', encoding='utf-8') as f:
+        f.write(sitemap_content)
+    print("✅ 动态排序更新完成。")
 
 if __name__ == "__main__":
     fetch_polymarket_data()
