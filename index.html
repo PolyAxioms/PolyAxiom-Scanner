@@ -1,43 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PolyAxiom - Polymarket 实时高胜率信号监控</title>
+    <style>
+        :root {
+            --bg: #0a0e17; --card-bg: #161b22; --accent: #238636;
+            --text: #adbac7; --text-bright: #ffffff; --text-dim: #768390; --link: #58a6ff;
+        }
+        body {
+            background-color: var(--bg); color: var(--text);
+            font-family: -apple-system, system-ui, sans-serif;
+            margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center;
+        }
+        header { text-align: center; margin-bottom: 25px; }
+        .logo-container img { max-width: 130px; height: auto; margin-bottom: 8px; }
+        .container {
+            max-width: 1200px; width: 100%;
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px;
+        }
+        .card {
+            background: var(--card-bg); border: 1px solid #30363d; border-radius: 10px;
+            padding: 20px; display: flex; flex-direction: column; justify-content: space-between;
+        }
+        .title { font-size: 16px; font-weight: 600; color: var(--text-bright); min-height: 44px; margin-bottom: 15px; }
+        .stats-box { background: rgba(255,255,255,0.03); padding: 12px; border-radius: 6px; margin-bottom: 15px; }
+        .odds-value { font-size: 22px; font-weight: bold; color: var(--link); }
+        .btn { background: var(--accent); color: white; text-align: center; padding: 10px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 14px; }
+        footer { margin-top: 60px; padding: 30px; text-align: center; font-size: 12px; color: var(--text-dim); border-top: 1px solid #30363d; width: 100%; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo-container"><img src="logo.png" alt="PolyAxiom"></div>
+    <p>Polymarket 实时高胜率信号监控</p>
+</header>
+
+<div class="container" id="signals-list">
+    <p style="grid-column: 1/-1; text-align:center;">正在同步最新预测信号...</p>
+</div>
+
+<footer>
+    <div>© 2026 PolyAxiom | <a href="https://t.me/XXYY_CC" style="color:var(--link);text-decoration:none;">联系我们 (Telegram)</a></div>
+</footer>
+
 <script>
     async function loadSignals() {
         try {
+            // 加入时间戳确保不读旧缓存
             const response = await fetch('data.json?v=' + Date.now());
+            if (!response.ok) throw new Error('无法加载数据文件');
             const data = await response.json();
             const list = document.getElementById('signals-list');
             
+            if (!data || data.length === 0) {
+                list.innerHTML = '<p style="grid-column: 1/-1; text-align:center;">暂无活动信号</p>';
+                return;
+            }
+
             list.innerHTML = data.map(item => `
                 <div class="card">
                     <div>
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                            <span class="category">${item.category}</span>
+                            <span style="font-size: 11px; color: var(--link);">${item.category || '预测市场'}</span>
                             <span style="font-size: 10px; color: #3fb950; display: flex; align-items: center;">
                                 <span style="width: 6px; height: 6px; background: #3fb950; border-radius: 50%; margin-right: 5px; animation: pulse 2s infinite;"></span>
-                                24h Vol: $${item.volume}k
+                                Vol: $${item.volume || 0}k
                             </span>
                         </div>
                         <div class="title">${item.title}</div>
-                        <div class="stats">
-                            <div class="odds-label">实时胜率</div>
+                        <div class="stats-box">
+                            <div style="font-size: 11px; color: var(--text-dim); margin-bottom: 4px;">当前胜率</div>
                             <div class="odds-value">${item.odds}%</div>
                         </div>
                     </div>
                     <a href="${item.link}" class="btn" target="_blank">立即前往下单</a>
                 </div>
             `).join('');
-
-            // 更新 SEO 描述
-            const topTitles = data.slice(0, 3).map(item => item.title).join(', ');
-            document.getElementById('meta-description').content = `PolyAxiom 正在监控：${topTitles}... 获取 Polymarket 最新暴涨信号。`;
-            
         } catch (e) {
-            console.error(e);
+            console.error("前端渲染出错:", e);
+            document.getElementById('signals-list').innerHTML = '<p style="grid-column: 1/-1; text-align:center;">数据更新中，请稍后刷新页面</p>';
         }
     }
-    // 增加一个简单的脉冲动画 CSS
-    const style = document.createElement('style');
-    style.innerHTML = "@keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }";
-    document.head.appendChild(style);
-    
     loadSignals();
-    setInterval(loadSignals, 60000);
+    setInterval(loadSignals, 60000); // 每 60 秒自动刷新一次
 </script>
+</body>
+</html>
