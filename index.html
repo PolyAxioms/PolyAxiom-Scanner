@@ -1,172 +1,23 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>PolyAxiom - Polymarket 实时高胜率信号监控</title>
-    <meta name="description" id="meta-description" content="聚焦 Polymarket 实时高胜率信号，捕捉预测市场每一个机会。">
-    <meta name="keywords" content="Polymarket, 预测市场, Web3, 信号监控, 胜率分析, PolyAxiom">
-
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@Poly_Axiom">
-    <meta name="twitter:title" content="PolyAxiom | 实时高胜率信号监控">
-    <meta name="twitter:image" content="https://polyaxiom.com/logo.png">
-
-    <style>
-        :root {
-            --bg: #0a0e17;
-            --card-bg: #161b22;
-            --accent: #238636;
-            --text: #adbac7;
-            --text-bright: #ffffff;
-            --text-dim: #768390;
-            --link: #58a6ff;
-        }
-
-        body {
-            background-color: var(--bg);
-            color: var(--text);
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 25px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .logo-container img {
-            max-width: 130px; /* 锁定 130px 最美比例 */
-            height: auto;
-            display: block;
-            filter: drop-shadow(0 0 8px rgba(88, 166, 255, 0.2));
-            margin-bottom: 8px;
-        }
-
-        header p { font-size: 13px; color: var(--text-dim); margin: 0; letter-spacing: 0.8px; }
-
-        .container {
-            max-width: 1200px;
-            width: 100%;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 16px;
-        }
-
-        .card {
-            background: var(--card-bg);
-            border: 1px solid #30363d;
-            border-radius: 10px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: transform 0.2s;
-        }
-
-        .card:hover { transform: translateY(-3px); border-color: #444c56; }
-
-        .category { font-size: 11px; color: var(--link); text-transform: uppercase; margin-bottom: 8px; }
-
-        .title {
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--text-bright);
-            margin-bottom: 15px;
-            line-height: 1.4;
-            min-height: 44px; /* 统一卡片高度 */
-        }
-
-        .stats {
-            background: rgba(255, 255, 255, 0.03);
-            padding: 12px;
-            border-radius: 6px;
-            margin-bottom: 15px;
-        }
-
-        .odds-label { font-size: 11px; color: var(--text-dim); margin-bottom: 4px; }
-        .odds-value { font-size: 22px; font-weight: bold; color: var(--link); }
-
-        .btn {
-            background: var(--accent);
-            color: white;
-            text-align: center;
-            padding: 10px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 14px;
-        }
-
-        footer {
-            margin-top: 60px;
-            padding: 30px 20px;
-            text-align: center;
-            font-size: 13px;
-            color: var(--text-dim);
-            border-top: 1px solid #30363d;
-            width: 100%;
-            max-width: 600px;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 12px;
-        }
-
-        .footer-links a {
-            color: var(--link);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-    </style>
-</head>
-<body>
-
-<header>
-    <div class="logo-container">
-        <img src="logo.png" alt="PolyAxiom">
-    </div>
-    <p>Polymarket 实时高胜率信号监控</p>
-</header>
-
-<div class="container" id="signals-list">
-    </div>
-
-<footer>
-    <div>© 2026 PolyAxiom | 聚焦预测市场动态</div>
-    <div class="footer-links">
-        <a href="https://t.me/PolyAxiom_ZH" target="_blank">✈️ Telegram</a>
-        <a href="https://x.com/Poly_Axiom" target="_blank">𝕏 Twitter</a>
-    </div>
-</footer>
-
 <script>
     async function loadSignals() {
         try {
-            const response = await fetch('data.json?v=' + Date.now()); // 强制跳过缓存
+            const response = await fetch('data.json?v=' + Date.now());
             const data = await response.json();
             const list = document.getElementById('signals-list');
             
             list.innerHTML = data.map(item => `
                 <div class="card">
                     <div>
-                        <div class="category">${item.category}</div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                            <span class="category">${item.category}</span>
+                            <span style="font-size: 10px; color: #3fb950; display: flex; align-items: center;">
+                                <span style="width: 6px; height: 6px; background: #3fb950; border-radius: 50%; margin-right: 5px; animation: pulse 2s infinite;"></span>
+                                24h Vol: $${item.volume}k
+                            </span>
+                        </div>
                         <div class="title">${item.title}</div>
                         <div class="stats">
-                            <div class="odds-label">当前胜率</div>
+                            <div class="odds-label">实时胜率</div>
                             <div class="odds-value">${item.odds}%</div>
                         </div>
                     </div>
@@ -174,18 +25,19 @@
                 </div>
             `).join('');
 
-            // 动态更新 SEO 描述，抓取前 3 个热门标题
+            // 更新 SEO 描述
             const topTitles = data.slice(0, 3).map(item => item.title).join(', ');
-            document.getElementById('meta-description').content = `PolyAxiom 正在监控：${topTitles}... 获取 Polymarket 最新高胜率信号。`;
+            document.getElementById('meta-description').content = `PolyAxiom 正在监控：${topTitles}... 获取 Polymarket 最新暴涨信号。`;
             
         } catch (e) {
-            document.getElementById('signals-list').innerHTML = 
-                '<p style="grid-column: 1/-1; text-align:center;">同步中，请刷新...</p>';
+            console.error(e);
         }
     }
+    // 增加一个简单的脉冲动画 CSS
+    const style = document.createElement('style');
+    style.innerHTML = "@keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }";
+    document.head.appendChild(style);
+    
     loadSignals();
-    setInterval(loadSignals, 60000); // 每分钟前端静默刷新
+    setInterval(loadSignals, 60000);
 </script>
-
-</body>
-</html>
