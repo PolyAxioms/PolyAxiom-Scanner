@@ -3,44 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PolyAxiom - 實時高勝率信號監控</title>
+    <title>PolyAxiom - 实时高胜率信号与巨鲸资金流监控</title>
+    <meta name="description" content="PolyAxiom 专注于 Polymarket 预测市场信号监控。通过追踪巨鲸资金流向与胜率异动，为您提供最敏锐的交易参考方案。">
+    <meta name="keywords" content="Polymarket, 预测市场, 巨鲸追踪, 高胜率信号, 加密货币预测, PolyAxiom">
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FinancialService",
+      "name": "PolyAxiom",
+      "description": "Real-time high-win-rate signals and whale movement tracker for Polymarket.",
+      "url": "https://polyaxiom.com"
+    }
+    </script>
+
     <style>
         :root {
             --bg: #0d1117; --card-bg: #161b22; --accent: #238636;
             --text: #adbac7; --text-bright: #ffffff; --text-dim: #768390; --link: #58a6ff;
             --hot: #f85149; --gold: #d4af37;
         }
-
         body { background: var(--bg); color: var(--text); font-family: system-ui; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
         header { text-align: center; margin-bottom: 30px; }
         .logo-container img { max-width: 110px; filter: drop-shadow(0 0 10px rgba(88,166,255,0.2)); }
-
         .container { max-width: 1200px; width: 100%; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 18px; }
-
         .card {
             background: var(--card-bg); border: 1px solid #30363d; border-radius: 12px;
             padding: 20px; display: flex; flex-direction: column; justify-content: space-between;
             transition: all 0.3s ease; position: relative;
         }
         .card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-
-        /* 尊貴金邊特效 */
-        .card-gold {
-            border: 1px solid var(--gold) !important;
-            background: linear-gradient(145deg, #1c2128, #161b22);
-            box-shadow: inset 0 0 20px rgba(212, 175, 55, 0.05);
-        }
+        .card-gold { border: 1px solid var(--gold) !important; background: linear-gradient(145deg, #1c2128, #161b22); }
         .card-gold .odds-value { color: var(--gold) !important; }
-        .card-gold .btn { background: #9a7d28; border: 1px solid var(--gold); }
-
         .title { font-size: 15px; font-weight: 600; color: var(--text-bright); min-height: 40px; margin-bottom: 12px; }
         .stats-box { background: rgba(0,0,0,0.3); padding: 12px; border-radius: 8px; margin-bottom: 15px; }
         .odds-value { font-size: 26px; font-weight: 800; color: var(--link); }
         .btn { background: var(--accent); color: white; text-align: center; padding: 12px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 14px; }
-
         @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
         .hot-tag { color: var(--hot); font-weight: 800; animation: pulse 1.5s infinite; }
-
         footer { margin-top: 60px; padding: 40px; text-align: center; border-top: 1px solid #30363d; width: 100%; font-size: 13px; color: var(--text-dim); }
         .footer-links a { color: var(--link); text-decoration: none; margin: 0 15px; }
     </style>
@@ -49,15 +49,19 @@
 
 <header>
     <div class="logo-container"><img src="logo.png" alt="PolyAxiom"></div>
-    <p style="opacity: 0.8; margin-top: 10px;">PolyAxiom 高勝率與異動捕捉引擎</p>
+    <h1 style="font-size: 18px; margin-top: 10px; font-weight: 400; opacity: 0.9;">PolyAxiom 高胜率与资金异动捕捉引擎</h1>
 </header>
 
-<div class="container" id="signals-list"></div>
+<div class="container" id="signals-list">
+    <div style="padding: 20px; color: var(--text-dim);">
+        正在加载 Polymarket 实时高胜率信号... 包含 2026 世界杯、加密货币趋势监控及巨鲸追踪信号。
+    </div>
+</div>
 
 <footer>
-    <div>© 2026 PolyAxiom | 聚焦頂級預測市場動態</div>
+    <div>© 2026 PolyAxiom | 聚焦顶级预测市场动态</div>
     <div class="footer-links" style="margin-top:15px;">
-        <a href="https://t.me/PolyAxiom_ZH" target="_blank">✈️ Telegram 頻道</a>
+        <a href="https://t.me/PolyAxiom_ZH" target="_blank">✈️ Telegram 频道</a>
         <a href="https://x.com/Poly_Axiom" target="_blank">🐦 官方推特(X)</a>
     </div>
 </footer>
@@ -71,31 +75,28 @@
 
             list.innerHTML = data.map(item => {
                 const isGold = item.odds >= 90;
-                // 成交量大於等於 5k 時顯示高亮色
                 const volColor = item.volume >= 5 ? '#00ffa3' : '#3f8958';
-                
                 return `
                     <div class="card ${isGold ? 'card-gold' : ''}" style="${item.is_hot ? 'border-color: var(--hot);' : ''}">
                         <div>
                             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                                 <span class="${item.is_hot ? 'hot-tag' : ''}" style="font-size: 11px; color: var(--link);">
-                                    ${item.is_hot ? '🔥 資金異動' : ''} 【${item.category || '預測市場'}】
+                                    ${item.is_hot ? '🔥 资金异动' : ''} 【${item.category}】
                                 </span>
                                 <span style="font-size: 12px; color: ${volColor}; font-weight: bold;">Vol: $${item.volume}k</span>
                             </div>
                             <div class="title">${item.title}</div>
                             <div class="stats-box">
-                                <div style="font-size: 11px; color: var(--text-dim); margin-bottom: 4px;">當前勝率</div>
+                                <div style="font-size: 11px; color: var(--text-dim); margin-bottom: 4px;">当前胜率</div>
                                 <div class="odds-value">${item.odds}% ${item.is_hot ? '↑' : ''}</div>
                             </div>
                         </div>
-                        <a href="${item.link}" class="btn" target="_blank">立即前往下單</a>
+                        <a href="${item.link}" class="btn" target="_blank">立即前往下单</a>
                     </div>
                 `;
             }).join('');
         } catch (e) { console.error(e); }
     }
-
     loadSignals();
     setInterval(loadSignals, 60000);
 </script>
