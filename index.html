@@ -8,6 +8,7 @@
         :root {
             --bg: #0a0e17; --card-bg: #161b22; --accent: #238636;
             --text: #adbac7; --text-bright: #ffffff; --text-dim: #768390; --link: #58a6ff;
+            --hot: #f85149;
         }
         body {
             background-color: var(--bg); color: var(--text);
@@ -23,12 +24,14 @@
         .card {
             background: var(--card-bg); border: 1px solid #30363d; border-radius: 10px;
             padding: 20px; display: flex; flex-direction: column; justify-content: space-between;
+            transition: all 0.2s ease;
         }
         .title { font-size: 16px; font-weight: 600; color: var(--text-bright); min-height: 44px; margin-bottom: 15px; }
         .stats-box { background: rgba(255,255,255,0.03); padding: 12px; border-radius: 6px; margin-bottom: 15px; }
         .odds-value { font-size: 22px; font-weight: bold; color: var(--link); }
         .btn { background: var(--accent); color: white; text-align: center; padding: 10px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 14px; }
         footer { margin-top: 60px; padding: 30px; text-align: center; font-size: 12px; color: var(--text-dim); border-top: 1px solid #30363d; width: 100%; }
+        .footer-links a { color: var(--link); text-decoration: none; margin: 0 10px; }
         @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
     </style>
 </head>
@@ -44,49 +47,48 @@
 </div>
 
 <footer>
-    <div>© 2026 PolyAxiom | <a href="https://t.me/XXYY_CC" style="color:var(--link);text-decoration:none;">联系我们 (Telegram)</a></div>
+    <div>© 2026 PolyAxiom | 聚焦预测市场热度</div>
+    <div class="footer-links" style="margin-top: 10px;">
+        <a href="https://t.me/PolyAxiom_ZH" target="_blank">✈️ Telegram 频道</a>
+        <a href="https://x.com/Poly_Axiom" target="_blank">𝕏 官方推特</a>
+    </div>
 </footer>
 
 <script>
     async function loadSignals() {
         try {
-            // 加入时间戳确保不读旧缓存
             const response = await fetch('data.json?v=' + Date.now());
             if (!response.ok) throw new Error('无法加载数据文件');
             const data = await response.json();
             const list = document.getElementById('signals-list');
             
-            if (!data || data.length === 0) {
-                list.innerHTML = '<p style="grid-column: 1/-1; text-align:center;">暂无活动信号</p>';
-                return;
-            }
-
             list.innerHTML = data.map(item => `
-                <div class="card">
+                <div class="card" style="${item.is_hot ? 'border-color: var(--hot); box-shadow: 0 0 10px rgba(248, 81, 73, 0.15);' : ''}">
                     <div>
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                            <span style="font-size: 11px; color: var(--link);">${item.category || '预测市场'}</span>
+                            <span style="font-size: 11px; color: ${item.is_hot ? 'var(--hot)' : 'var(--link)'}; font-weight: bold;">
+                                ${item.is_hot ? '🔥 异动暴涨' : (item.category || '预测市场')}
+                            </span>
                             <span style="font-size: 10px; color: #3fb950; display: flex; align-items: center;">
                                 <span style="width: 6px; height: 6px; background: #3fb950; border-radius: 50%; margin-right: 5px; animation: pulse 2s infinite;"></span>
-                                Vol: $${item.volume || 0}k
+                                Vol: $${item.volume}k
                             </span>
                         </div>
                         <div class="title">${item.title}</div>
                         <div class="stats-box">
                             <div style="font-size: 11px; color: var(--text-dim); margin-bottom: 4px;">当前胜率</div>
-                            <div class="odds-value">${item.odds}%</div>
+                            <div class="odds-value" style="${item.is_hot ? 'color: var(--hot);' : ''}">${item.odds}% ${item.is_hot ? '↑' : ''}</div>
                         </div>
                     </div>
-                    <a href="${item.link}" class="btn" target="_blank">立即前往下单</a>
+                    <a href="${item.link}" class="btn" target="_blank" style="${item.is_hot ? 'background: var(--hot);' : ''}">立即前往下单</a>
                 </div>
             `).join('');
         } catch (e) {
-            console.error("前端渲染出错:", e);
-            document.getElementById('signals-list').innerHTML = '<p style="grid-column: 1/-1; text-align:center;">数据更新中，请稍后刷新页面</p>';
+            console.error("渲染失败:", e);
         }
     }
     loadSignals();
-    setInterval(loadSignals, 60000); // 每 60 秒自动刷新一次
+    setInterval(loadSignals, 60000);
 </script>
 </body>
 </html>
