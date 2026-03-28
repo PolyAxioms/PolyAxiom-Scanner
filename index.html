@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PolyAxiom - 实时高胜率信号监控</title>
+    <title>PolyAxiom - 實時高勝率信號監控</title>
     <style>
         :root {
             --bg: #0d1117; --card-bg: #161b22; --accent: #238636;
             --text: #adbac7; --text-bright: #ffffff; --text-dim: #768390; --link: #58a6ff;
             --hot: #f85149; --gold: #d4af37;
         }
+
         body { background: var(--bg); color: var(--text); font-family: system-ui; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
         header { text-align: center; margin-bottom: 30px; }
         .logo-container img { max-width: 110px; filter: drop-shadow(0 0 10px rgba(88,166,255,0.2)); }
-        
-        .container { max-width: 1200px; width: 100%; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px; }
+
+        .container { max-width: 1200px; width: 100%; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 18px; }
 
         .card {
             background: var(--card-bg); border: 1px solid #30363d; border-radius: 12px;
@@ -23,7 +24,7 @@
         }
         .card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
 
-        /* 尊贵暗金特效 */
+        /* 尊貴金邊特效 */
         .card-gold {
             border: 1px solid var(--gold) !important;
             background: linear-gradient(145deg, #1c2128, #161b22);
@@ -48,16 +49,16 @@
 
 <header>
     <div class="logo-container"><img src="logo.png" alt="PolyAxiom"></div>
-    <p style="opacity: 0.8; margin-top: 10px;">PolyAxiom 高胜率异动捕获引擎</p>
+    <p style="opacity: 0.8; margin-top: 10px;">PolyAxiom 高勝率與異動捕捉引擎</p>
 </header>
 
 <div class="container" id="signals-list"></div>
 
 <footer>
-    <div>© 2026 PolyAxiom | 聚焦顶级预测市场</div>
+    <div>© 2026 PolyAxiom | 聚焦頂級預測市場動態</div>
     <div class="footer-links" style="margin-top:15px;">
-        <a href="https://t.me/PolyAxiom_ZH" target="_blank">✈️ Telegram 频道</a>
-        <a href="https://x.com/Poly_Axiom" target="_blank">𝕏 官方推特</a>
+        <a href="https://t.me/PolyAxiom_CH" target="_blank">✈️ Telegram 頻道</a>
+        <a href="https://x.com/Poly_Axiom" target="_blank">🐦 官方推特(X)</a>
     </div>
 </footer>
 
@@ -67,29 +68,34 @@
             const response = await fetch('data.json?v=' + Date.now());
             const data = await response.json();
             const list = document.getElementById('signals-list');
-            
+
             list.innerHTML = data.map(item => {
                 const isGold = item.odds >= 90;
+                // 成交量大於等於 5k 時顯示高亮色
+                const volColor = item.volume >= 5 ? '#00ffa3' : '#3f8958';
+                
                 return `
-                <div class="card ${isGold ? 'card-gold' : ''}" style="${item.is_hot ? 'border-color: var(--hot);' : ''}">
-                    <div>
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                            <span class="${item.is_hot ? 'hot-tag' : ''}" style="font-size: 11px; color: var(--link);">
-                                ${item.is_hot ? '🔥 异动暴涨' : (item.category || '预测市场')}
-                            </span>
-                            <span style="font-size: 10px; color: #3fb950;">Vol: $${item.volume}k</span>
+                    <div class="card ${isGold ? 'card-gold' : ''}" style="${item.is_hot ? 'border-color: var(--hot);' : ''}">
+                        <div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                <span class="${item.is_hot ? 'hot-tag' : ''}" style="font-size: 11px; color: var(--link);">
+                                    ${item.is_hot ? '🔥 資金異動' : ''} 【${item.category || '預測市場'}】
+                                </span>
+                                <span style="font-size: 12px; color: ${volColor}; font-weight: bold;">Vol: $${item.volume}k</span>
+                            </div>
+                            <div class="title">${item.title}</div>
+                            <div class="stats-box">
+                                <div style="font-size: 11px; color: var(--text-dim); margin-bottom: 4px;">當前勝率</div>
+                                <div class="odds-value">${item.odds}% ${item.is_hot ? '↑' : ''}</div>
+                            </div>
                         </div>
-                        <div class="title">${item.title}</div>
-                        <div class="stats-box">
-                            <div style="font-size: 11px; color: var(--text-dim); margin-bottom: 4px;">当前胜率</div>
-                            <div class="odds-value">${item.odds}% ${item.is_hot ? '↑' : ''}</div>
-                        </div>
+                        <a href="${item.link}" class="btn" target="_blank">立即前往下單</a>
                     </div>
-                    <a href="${item.link}" class="btn" target="_blank">立即前往下单</a>
-                </div>
-            `}).join('');
+                `;
+            }).join('');
         } catch (e) { console.error(e); }
     }
+
     loadSignals();
     setInterval(loadSignals, 60000);
 </script>
