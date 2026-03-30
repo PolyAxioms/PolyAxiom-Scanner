@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="icon" type="image/png" href="favicon.png" />
+    
     <link rel="canonical" href="https://polyaxiom.com/" />
+    
     <title>PolyAxiom - Polymarket 实时高胜率信号与资金异动监控</title>
     <meta name="description" content="PolyAxiom 专注于监控 Polymarket 预测市场的实时资金流向。通过 AI 算法捕捉巨鲸动向，提供高胜率信号、异动预警及全球热门事件赔率分析。">
     <meta name="keywords" content="Polymarket, 预测市场, 资金异动, Web3, 加密货币预测, 高胜率信号, PolyAxiom">
@@ -77,7 +81,6 @@
 
     async function loadSignals() {
         try {
-            const list = document.getElementById('signals-list');
             const response = await fetch('data.json?v=' + Date.now());
             signalsData = await response.json();
             render();
@@ -105,13 +108,12 @@
         `).join('');
     }
 
-    // 活性功能：数字随机小幅跳变 (每 4 秒)
+    // ✅ 活性功能：数字随机跳变
     setInterval(() => {
         signalsData.forEach((item, index) => {
             const el = document.getElementById(`vol-${index}`);
             if (el) {
-                // 模拟成交增量 0.01k - 0.05k
-                item.volume = (parseFloat(item.volume) + (Math.random() * 0.04)).toFixed(1);
+                item.volume = (parseFloat(item.volume) + (Math.random() * 0.05)).toFixed(1);
                 el.innerText = `Vol: $${item.volume}k`;
                 el.style.color = '#58a6ff'; 
                 setTimeout(() => el.style.color = '#3f8958', 600);
@@ -119,11 +121,10 @@
         });
     }, 4000);
 
-    // 刷新进度条控制
     let progress = 0;
     function resetProgress() { progress = 0; }
     setInterval(() => {
-        progress += 2; // 每秒涨 2%，50秒刷新一次
+        progress += 2; 
         if (progress > 100) progress = 100;
         document.getElementById('progress-bar').style.width = progress + '%';
     }, 1000);
