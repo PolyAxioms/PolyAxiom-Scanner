@@ -3,14 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <link rel="icon" type="image/png" href="favicon.png" />
-    
     <link rel="canonical" href="https://polyaxiom.com/" />
-    
     <title>PolyAxiom - Polymarket 实时高胜率信号监控</title>
     <meta name="description" content="PolyAxiom 实时捕捉 Polymarket 巨鲸动向，筛选高胜率预测信号。">
-    
     <style>
         :root {
             --bg: #0d1117; --card-bg: #161b22; --accent: #238636;
@@ -18,7 +14,10 @@
             --hot: #f85149;
         }
         body { background: var(--bg); color: var(--text); font-family: system-ui, sans-serif; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
-        .container { max-width: 1200px; width: 100%; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 18px; }
+        .main-wrapper { max-width: 1200px; width: 100%; }
+        .widget-section { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-bottom: 40px; }
+        .widget-box { flex: 1; min-width: 380px; background: var(--card-bg); border-radius: 12px; border: 1px solid #30363d; overflow: hidden; height: 302px; }
+        .container { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 18px; }
         .card { background: var(--card-bg); border: 1px solid #30363d; border-radius: 12px; padding: 20px; transition: 0.3s; position: relative; }
         .card:hover { border-color: var(--link); transform: translateY(-3px); }
         .title { font-size: 15px; font-weight: 600; color: var(--text-bright); min-height: 45px; margin-bottom: 10px; }
@@ -27,24 +26,37 @@
         .btn { display: block; background: var(--accent); color: white; text-align: center; padding: 12px; border-radius: 8px; text-decoration: none; font-weight: bold; }
         .hot-tag { color: var(--hot); font-weight: bold; font-size: 12px; animation: blink 1.5s infinite; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
-        footer { margin-top: 50px; padding: 20px; text-align: center; color: var(--text-dim); font-size: 13px; }
+        footer { margin-top: 50px; padding: 20px; text-align: center; color: var(--text-dim); font-size: 13px; border-top: 1px solid #30363d; width: 100%; }
     </style>
 </head>
 <body>
 
 <header style="text-align:center; margin-bottom:40px;">
-    <img src="logo.png" alt="PolyAxiom" style="max-width:100px;">
-    <h1 style="color: var(--text-bright); font-size: 24px;">PolyAxiom 资金异动捕捉引擎</h1>
-    <p>实时扫描 Polymarket 巨鲸动向与高胜率信号</p>
+    <img src="logo.png" alt="PolyAxiom" style="max-width:100px; margin-bottom: 10px;">
+    <h1 style="color: var(--text-bright); font-size: 24px; margin: 0;">PolyAxiom 资金异动捕捉引擎</h1>
+    <p style="color: var(--text-dim);">实时扫描 Polymarket 巨鲸动向与高胜率信号</p>
 </header>
 
-<div class="container" id="signals-list"></div>
+<div class="main-wrapper">
+    <section class="widget-section">
+        <div class="widget-box">
+            <iframe src="https://embed.polymarket.com/market?event=2026-fifa-world-cup-winner-595&rotate=true&theme=dark&liveactivity=true&border=false&creator=PolyAxiom&height=300" 
+                    width="100%" height="300" frameborder="0" allowtransparency="true"></iframe>
+        </div>
+        <div class="widget-box">
+            <iframe src="https://embed.polymarket.com/market?event=balance-of-power-2026-midterms&rotate=true&theme=dark&liveactivity=true&border=false&creator=PolyAxiom&height=300" 
+                    width="100%" height="300" frameborder="0" allowtransparency="true"></iframe>
+        </div>
+    </section>
+
+    <div class="container" id="signals-list"></div>
+</div>
 
 <footer id="seo-footer">
-    <p>PolyAxiom 专注于 Polymarket 数据分析，监控世界杯、NBA、地缘政治等预测市场的实时赔率与资金流向。</p>
-    <div>
-        <a href="https://t.me/PolyAxiom_ZH" target="_blank" style="color:var(--link); margin: 0 10px;">Telegram</a>
-        <a href="https://x.com/Poly_Axiom" target="_blank" style="color:var(--link); margin: 0 10px;">Twitter</a>
+    <p>PolyAxiom 专注于监控世界杯、地缘政治等预测市场的实时赔率。目前已成功筛选多项高热度项目。</p>
+    <div style="margin-top: 15px;">
+        <a href="https://t.me/PolyAxiom_ZH" target="_blank" style="color:var(--link); margin: 0 10px; text-decoration: none;">✈️ Telegram</a>
+        <a href="https://x.com/Poly_Axiom" target="_blank" style="color:var(--link); margin: 0 10px; text-decoration: none;">🐦 Twitter</a>
     </div>
 </footer>
 
@@ -67,10 +79,10 @@
                     <a href="${item.link}" class="btn" target="_blank">立即前往下单</a>
                 </div>
             `).join('');
-        } catch (e) { console.error(e); }
+        } catch (e) { console.error("数据同步失败:", e); }
     }
     load();
-    setInterval(load, 60000); // 每一分钟强制刷新一次数据
+    setInterval(load, 60000); 
 </script>
 </body>
 </html>
