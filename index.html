@@ -16,10 +16,10 @@
         body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; }
         .main-wrapper { max-width: 1200px; width: 100%; padding: 20px; box-sizing: border-box; }
         
-        /* 语言切换按钮 - 优化位置 */
         .lang-switch { position: absolute; top: 20px; right: 20px; z-index: 1001; background: rgba(13, 17, 23, 0.9); border: 1px solid var(--link); color: var(--link); padding: 6px 16px; border-radius: 20px; cursor: pointer; font-size: 13px; font-weight: bold; backdrop-filter: blur(4px); transition: 0.3s; }
         .lang-switch:hover { background: var(--link); color: white; }
 
+        /* 核心四个组件的网格布局 */
         .widget-section { display: grid; grid-template-columns: repeat(auto-fit, minmax(480px, 1fr)); gap: 20px; margin-bottom: 40px; }
         @media (max-width: 1000px) { .widget-section { grid-template-columns: 1fr; } }
         
@@ -73,6 +73,8 @@
     <section class="widget-section">
         <div class="widget-box"><iframe src="https://embed.polymarket.com/market?event=2026-fifa-world-cup-winner-595&rotate=true&theme=dark&liveactivity=true&border=false&creator=Axiomcom&height=300" width="100%" height="300" frameborder="0"></iframe></div>
         <div class="widget-box"><iframe src="https://embed.polymarket.com/market?event=balance-of-power-2026-midterms&rotate=true&theme=dark&liveactivity=true&border=false&creator=Axiomcom&height=300" width="100%" height="300" frameborder="0"></iframe></div>
+        <div class="widget-box"><iframe src="https://embed.polymarket.com/market?market=will-bitcoin-reach-1000000-by-december-31-2026-946&theme=dark&liveactivity=true&border=false&creator=Axiomcom&height=300" width="100%" height="300" frameborder="0"></iframe></div>
+        <div class="widget-box"><iframe src="https://embed.polymarket.com/market?event=richest-person-on-december-31-2026&rotate=true&theme=dark&liveactivity=true&border=false&creator=Axiomcom&height=300" width="100%" height="300" frameborder="0"></iframe></div>
     </section>
 
     <div class="container" id="signals-list"></div>
@@ -166,7 +168,6 @@
             `}).join('');
     }
 
-    // 分享海报逻辑保持不变...
     async function generatePoster(index) {
         const item = currentSignalsData[index];
         const texts = i18n[currentLang];
