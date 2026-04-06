@@ -15,33 +15,27 @@
         body { 
             background: var(--bg); color: var(--text); font-family: -apple-system, sans-serif; 
             margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh;
-            overflow-x: hidden; /* 防止横向滚动条 */
+            overflow-x: hidden;
         }
         
-        /* 核心三栏布局：修正挤压问题 */
+        /* 核心三栏布局 */
         .main-wrapper { 
             max-width: 1500px; 
             width: 95%; 
             margin: 0 auto;
             display: grid; 
-            /* 固定左右宽度，中间 minmax(0, 1fr) 是防止被挤爆的关键 */
             grid-template-columns: 260px minmax(0, 1fr) 280px; 
             gap: 25px; 
             padding: 20px 0;
             box-sizing: border-box;
         }
 
-        /* 顶部 Header 占满全宽 */
         header { grid-column: 1 / -1; text-align: center; padding: 30px 0; position: relative; }
-        
-        /* 中间内容区 */
         main { min-width: 0; width: 100%; display: flex; flex-direction: column; }
 
-        /* 左侧/右侧面板 */
-        .side-panel { position: sticky; top: 20px; height: fit-content; max-height: 85vh; overflow: hidden; }
-        .glass-box { background: var(--card-bg); backdrop-filter: blur(10px); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+        .side-panel { position: sticky; top: 20px; height: fit-content; max-height: 85vh; }
+        .glass-box { background: var(--card-bg); backdrop-filter: blur(10px); border: 1px solid var(--border); border-radius: 12px; padding: 20px; overflow: hidden; }
 
-        /* 四个核心组件网格修正 */
         .widget-section { 
             display: grid; 
             grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); 
@@ -51,7 +45,6 @@
         }
         .widget-box { background: #000; border-radius: 12px; border: 1px solid var(--border); overflow: hidden; height: 302px; width: 100%; }
 
-        /* 信号卡片平铺 */
         .container { 
             display: grid; 
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
@@ -59,39 +52,37 @@
             width: 100%;
         }
 
-        /* 跑马灯修正 */
         .ticker-wrap { width: 100%; background: #000; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 25px; overflow: hidden; padding: 12px 0; }
         .ticker { display: flex; white-space: nowrap; animation: ticker-kb 60s linear infinite; }
         .ticker-item { color: var(--link); font-size: 13px; font-weight: bold; margin-right: 60px; flex-shrink: 0; }
 
-        /* 其他原有样式保持 */
         .stats-bar { display: flex; justify-content: center; gap: 40px; margin-top: 20px; flex-wrap: wrap; }
-        .stat-item { text-align: center; }
-        .stat-val { font-size: 28px; font-weight: 800; color: var(--text-bright); font-family: monospace; }
+        .stat-val { font-size: 28px; font-weight: 800; color: var(--text-bright); font-family: monospace; min-width: 120px; }
         .dot { height: 10px; width: 10px; background-color: var(--accent); border-radius: 50%; display: inline-block; margin-right: 6px; box-shadow: 0 0 10px var(--accent); animation: blink 2s infinite; }
         
         .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 18px; display: flex; flex-direction: column; transition: 0.3s; }
         .card:hover { border-color: var(--link); transform: translateY(-4px); }
         .title { font-size: 14px; font-weight: 600; color: var(--text-bright); min-height: 40px; margin: 12px 0; line-height: 1.4; }
         .stats-box { background: rgba(0,0,0,0.3); padding: 12px; border-radius: 8px; margin-bottom: 15px; }
+        
         .btn-group { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
         .btn { padding: 10px; border-radius: 6px; font-size: 12px; font-weight: bold; cursor: pointer; text-align: center; text-decoration: none; border: none; }
         .btn-primary { background: var(--accent); color: white; }
         .btn-secondary { background: #30363d; color: white; }
 
-        /* 仪表盘 */
         .gauge-track { width: 100%; height: 6px; background: linear-gradient(90deg, var(--hot), #f1e05a, var(--accent)); border-radius: 3px; margin: 15px 0; position: relative; }
         .gauge-pointer { position: absolute; width: 4px; height: 12px; background: #fff; top: -3px; left: 50%; border-radius: 2px; transition: 0.8s; }
 
         .lang-switch { position: absolute; top: 20px; right: 0; background: none; border: 1px solid var(--link); color: var(--link); padding: 5px 15px; border-radius: 20px; cursor: pointer; font-size: 12px; }
 
         @media (max-width: 1200px) {
-            .main-wrapper { grid-template-columns: 1fr; width: 98%; padding: 10px; }
+            .main-wrapper { grid-template-columns: 1fr; width: 98%; }
             .side-panel { display: none; }
         }
 
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
         @keyframes ticker-kb { 0% { transform: translateX(10%); } 100% { transform: translateX(-100%); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 3000; justify-content: center; align-items: center; }
         .modal-content { background: var(--card-bg); padding: 25px; border-radius: 12px; text-align: center; max-width: 450px; border: 1px solid var(--link); }
@@ -115,14 +106,17 @@
         <p id="subTitle" style="color: var(--text-dim); margin-top: 8px; font-size: 14px;"></p>
         <div class="stats-bar">
             <div class="stat-item"><span class="stat-val"><span class="dot"></span>LIVE</span><div style="font-size:10px; color:var(--text-dim);" id="label-status">系统状态</div></div>
-            <div class="stat-item"><span class="stat-val" id="stat-scan">4,993+</span><div style="font-size:10px; color:var(--text-dim);" id="label-scan">今日扫描</div></div>
-            <div class="stat-item"><span class="stat-val" id="stat-vol">$10807.14M</span><div style="font-size:10px; color:var(--text-dim);" id="label-vol">捕捉资金</div></div>
+            <div class="stat-item"><span class="stat-val" id="stat-scan">0</span><div style="font-size:10px; color:var(--text-dim);" id="label-scan">今日扫描</div></div>
+            <div class="stat-item"><span class="stat-val" id="stat-vol">$0M</span><div style="font-size:10px; color:var(--text-dim);" id="label-vol">捕捉资金</div></div>
         </div>
     </header>
 
     <aside class="side-panel glass-box">
-        <div style="font-size:11px; color:var(--link); font-weight:bold; margin-bottom:15px;">📡 ALPHA FEED</div>
-        <div id="feed-flow" style="font-size:11px; line-height:1.6; color:var(--text-dim);"></div>
+        <div style="font-size:11px; color:var(--link); font-weight:bold; margin-bottom:15px; display:flex; justify-content:space-between;">
+            <span>📡 ALPHA FEED</span>
+            <span style="color:var(--accent); font-size:9px;">REAL-TIME</span>
+        </div>
+        <div id="feed-flow" style="font-size:11px; line-height:1.4; color:var(--text-dim);"></div>
     </aside>
 
     <main>
@@ -138,21 +132,22 @@
 
     <aside class="side-panel">
         <div class="glass-box" style="margin-bottom:15px;">
-            <div style="font-size:11px; font-weight:bold; color:#fff; text-align:center;">MARKET SENTIMENT</div>
+            <div style="font-size:11px; font-weight:bold; color:#fff; text-align:center; margin-bottom:10px;">MARKET SENTIMENT</div>
             <div class="gauge-track"><div class="gauge-pointer" id="gauge-dot"></div></div>
             <div style="display:flex; justify-content:space-between; font-size:9px; color:var(--text-dim);"><span>FEAR</span><span>GREED</span></div>
         </div>
         <div class="glass-box">
-            <div style="font-size:11px; font-weight:bold; color:var(--accent); margin-bottom:12px;">🚀 TOP GAINERS</div>
+            <div style="font-size:11px; font-weight:bold; color:var(--accent); margin-bottom:12px;">🚀 TOP GAINERS (24H)</div>
             <div id="gainers-list" style="font-size:11px; color:var(--text-bright);">
                 <div style="display:flex; justify-content:space-between; margin-bottom:8px;"><span>World Cup Yes</span><b style="color:var(--accent)">+14.2%</b></div>
                 <div style="display:flex; justify-content:space-between; margin-bottom:8px;"><span>BTC $1M Yes</span><b style="color:var(--accent)">+6.8%</b></div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:8px;"><span>Musk Mars 2026</span><b style="color:var(--accent)">+5.1%</b></div>
             </div>
         </div>
     </aside>
 
-    <footer style="grid-column: 1/-1; text-align: center; padding: 40px 0; color: var(--text-dim); font-size: 12px; border-top: 1px solid var(--border); margin-top: 40px;">
-        <p>© 2026 PolyAxiom.com | Official Polymarket Affiliate</p>
+    <footer style="grid-column: 1/-1; text-align: center; padding: 40px 0; color: var(--text-dim); font-size: 11px; border-top: 1px solid var(--border); margin-top: 40px;">
+        <p>© 2026 PolyAxiom.com | Data Navigation for Prediction Markets</p>
     </footer>
 </div>
 
@@ -160,54 +155,73 @@
 
 <script>
     const i18n = {
-        'zh': { mainTitle: "PolyAxiom 捕捉引擎", subTitle: "实时扫描 Polymarket 巨鲸大单 & 资金流向", prob: "当前胜率", btnBet: "立即下单", btnShare: "分享海报", langBtn: "English", posterTip: "长按保存图片分享", lStatus: "系统状态", lScan: "今日扫描", lVol: "捕捉资金", tagReward: "💎 收益加成" },
-        'en': { mainTitle: "PolyAxiom Engine", subTitle: "Live Scanning Polymarket Whale Moves", prob: "Win Prob", btnBet: "Bet Now", btnShare: "Share Alpha", langBtn: "简体中文", posterTip: "Long press to save", lStatus: "Status", lScan: "Scanned", lVol: "Alpha Vol", tagReward: "💎 Rewards" }
+        'zh': { mainTitle: "PolyAxiom 捕捉引擎", subTitle: "实时扫描 Polymarket 巨鲸大单 & 资金流向", prob: "当前胜率", btnBet: "立即下单", btnShare: "分享海报", langBtn: "English", posterTip: "长按保存图片分享", lStatus: "系统状态", lScan: "今日扫描", lVol: "捕捉资金" },
+        'en': { mainTitle: "PolyAxiom Engine", subTitle: "Live Scanning Polymarket Whale Moves", prob: "Win Prob", btnBet: "Bet Now", btnShare: "Share Alpha", langBtn: "简体中文", posterTip: "Long press to save", lStatus: "Status", lScan: "Scanned", lVol: "Alpha Vol" }
     };
 
     let currentLang = localStorage.getItem('polyaxiom_lang') || 'zh';
     let currentSignalsData = [];
 
-    // 跑马灯与 Feed 逻辑
-    const markets = ["世界杯盤口", "2026中期選舉", "BTC $100萬盤口", "NBA 冠軍盤口", "首富盤口"];
-    const actions = ["買入", "獲利平倉", "大額加倉"];
-    
-    function generateTicker() {
-        const whale = "0x" + Math.random().toString(16).slice(2, 4) + "..." + Math.random().toString(16).slice(2, 4);
-        const amount = "$" + (Math.floor(Math.random() * 90) + 10) + "k";
-        return `🐋 巨鯨 ${whale} ${actions[Math.floor(Math.random()*actions.length)]} <b>${amount}</b> ${markets[Math.floor(Math.random()*markets.length)]}`;
+    // --- 动态数字增长引擎 (北京时间凌晨重置) ---
+    const STAT_CONFIG = { baseScan: 5000, baseVol: 10800, updateFreq: 3000 };
+    function updateCounter() {
+        const now = new Date();
+        const bjTime = new Date(now.getTime() + (now.getTimezoneOffset() + 480) * 60000);
+        const secondsPassed = bjTime.getHours() * 3600 + bjTime.getMinutes() * 60 + bjTime.getSeconds();
+        const progress = secondsPassed / 84600; // 略小于86400，确保深夜达到目标
+        
+        const curScan = Math.floor(STAT_CONFIG.baseScan * progress + (Math.random() * 50));
+        const curVol = (STAT_CONFIG.baseVol * progress + (Math.random() * 8)).toFixed(2);
+        
+        document.getElementById('stat-scan').innerText = curScan.toLocaleString() + "+";
+        document.getElementById('stat-vol').innerText = "$" + curVol + "M";
     }
+    setInterval(updateCounter, STAT_CONFIG.updateFreq); updateCounter();
+
+    // --- Alpha Feed 逻辑 ---
+    const hotMarkets = ["2026 FIFA World Cup Winner", "BTC reach $100k by June", "FED Interest Rate Cut", "Elon Musk buy TikTok", "NBA Championship 2026", "Nvidia Market Cap Rank #1"];
+    const actionTypes = [{ text: "买入", color: "var(--accent)" }, { text: "大额加仓", color: "#58a6ff" }, { text: "获利平仓", color: "#f85149" }];
 
     function addFeed() {
         const flow = document.getElementById('feed-flow');
-        const item = document.createElement('div');
-        item.style.marginBottom = "12px";
-        item.style.borderLeft = "2px solid var(--accent)";
-        item.style.paddingLeft = "8px";
-        item.innerHTML = `<span style="color:var(--text-dim); font-size:9px;">${new Date().toLocaleTimeString()}</span><br>${generateTicker()}`;
-        flow.prepend(item);
-        if(flow.children.length > 12) flow.lastElementChild.remove();
-        document.getElementById('gauge-dot').style.left = (Math.random() * 80 + 10) + '%';
+        const addr = "0x" + Math.random().toString(16).slice(2, 4) + "..." + Math.random().toString(16).slice(2, 4);
+        const action = actionTypes[Math.floor(Math.random() * actionTypes.length)];
+        const isSuper = Math.random() > 0.8;
+        const amount = isSuper ? "$" + (Math.floor(Math.random()*300)+100) + "k" : "$" + (Math.floor(Math.random()*80)+5) + "k";
+        
+        const entry = document.createElement('div');
+        entry.style.cssText = `margin-bottom:15px; border-left:2px solid ${action.color}; padding-left:10px; animation:fadeIn 0.5s;`;
+        entry.innerHTML = `<div style="font-size:9px;color:var(--text-dim);">${new Date().toLocaleTimeString()}</div>
+            <div><span style="color:var(--whale)">🐋</span> 巨鲸 <span style="font-family:monospace;color:var(--link)">${addr}</span></div>
+            <div style="margin:3px 0;"><span style="color:${action.color}">${action.text}</span> <b style="${isSuper?'color:var(--whale);font-size:13px;':''}">${amount}</b></div>
+            <div style="font-size:10px;color:var(--text-dim);">${hotMarkets[Math.floor(Math.random()*hotMarkets.length)]}</div>`;
+        
+        flow.prepend(entry);
+        if(flow.children.length > 15) flow.lastElementChild.remove();
+        document.getElementById('gauge-dot').style.left = Math.max(10, Math.min(90, (parseFloat(document.getElementById('gauge-dot').style.left)||50) + (Math.random()-0.5)*15)) + '%';
     }
-    setInterval(addFeed, 5000); addFeed();
+    setInterval(addFeed, 4000); for(let i=0; i<8; i++) addFeed();
 
-    let tickerItems = Array.from({length: 6}, generateTicker);
-    function refreshTicker() { document.getElementById('live-ticker').innerHTML = tickerItems.concat(tickerItems).map(t => `<div class="ticker-item">${t}</div>`).join(''); }
-    setInterval(() => { tickerItems.shift(); tickerItems.push(generateTicker()); refreshTicker(); }, 8000);
-    refreshTicker();
+    // 跑马灯
+    function refreshTicker() {
+        const items = hotMarkets.map(m => `<div class="ticker-item">📊 ${m} <span style="color:var(--accent)">+${(Math.random()*15).toFixed(1)}%</span></div>`);
+        document.getElementById('live-ticker').innerHTML = items.concat(items).join('');
+    }
+    refreshTicker(); setInterval(refreshTicker, 60000);
 
-    // 核心 UI
+    // 语言与数据加载
     function updateUI() {
-        const texts = i18n[currentLang];
-        document.getElementById('mainTitle').innerText = texts.mainTitle;
-        document.getElementById('subTitle').innerText = texts.subTitle;
-        document.getElementById('langBtn').innerText = texts.langBtn;
-        document.getElementById('label-status').innerText = texts.lStatus;
-        document.getElementById('label-scan').innerText = texts.lScan;
-        document.getElementById('label-vol').innerText = texts.lVol;
+        const t = i18n[currentLang];
+        document.getElementById('mainTitle').innerText = t.mainTitle;
+        document.getElementById('subTitle').innerText = t.subTitle;
+        document.getElementById('langBtn').innerText = t.langBtn;
+        document.getElementById('label-status').innerText = t.lStatus;
+        document.getElementById('label-scan').innerText = t.lScan;
+        document.getElementById('label-vol').innerText = t.lVol;
         renderSignals();
     }
 
-    function toggleLang() { currentLang = currentLang === 'zh' ? 'en' : 'zh'; localStorage.setItem('polyaxiom_lang', currentLang); updateUI(); }
+    function toggleLang() { currentLang = currentLang==='zh'?'en':'zh'; localStorage.setItem('polyaxiom_lang', currentLang); updateUI(); }
 
     async function loadSignals() {
         try {
@@ -224,7 +238,7 @@
 
     function renderSignals() {
         const container = document.getElementById('signals-list');
-        const texts = i18n[currentLang];
+        const t = i18n[currentLang];
         container.innerHTML = currentSignalsData.map((item, index) => `
             <div class="card">
                 <div style="display:flex; justify-content:space-between; align-items:center;">
@@ -233,12 +247,12 @@
                 </div>
                 <div class="title">${item.title}</div>
                 <div class="stats-box">
-                    <div style="font-size:9px; color:var(--text-dim);">${texts.prob}</div>
+                    <div style="font-size:9px; color:var(--text-dim);">${t.prob}</div>
                     <div style="font-size:24px; font-weight:800; color:var(--link); font-family:monospace;">${item.odds}%</div>
                 </div>
                 <div class="btn-group">
-                    <a href="${item.link}?r=PolyAxiom" class="btn btn-primary" target="_blank">${texts.btnBet}</a>
-                    <button class="btn btn-secondary" onclick="generatePoster(${index})">${texts.btnShare}</button>
+                    <a href="${item.link}?r=PolyAxiom" class="btn btn-primary" target="_blank">${t.btnBet}</a>
+                    <button class="btn btn-secondary" onclick="generatePoster(${index})">${t.btnShare}</button>
                 </div>
             </div>
         `).join('');
