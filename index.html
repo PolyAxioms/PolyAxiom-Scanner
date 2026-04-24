@@ -3,215 +3,201 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PolyAxiom | 预测市场数据终端</title>
+    <title>PolyAxiom | 全球预测市场监控终端</title>
     <style>
         :root {
-            --bg: #06090f; --card-bg: #0d1117; --accent: #238636;
+            --bg: #040508; --card-bg: rgba(13, 17, 23, 0.8); --accent: #238636;
             --text: #8b949e; --text-white: #f0f6fc; --border: #30363d;
-            --blue: #388bfd; --purple: #8957e5; --orange: #d29922; --pink: #da36a8;
+            --blue: #388bfd; --orange: #d29922; --red: #f85149; --neon: #00f2ff;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background: var(--bg); color: var(--text); font-family: -apple-system, system-ui, sans-serif; overflow-x: hidden; }
         
-        .app-wrapper { max-width: 1440px; margin: 0 auto; padding: 20px; }
+        /* 1. 暗黑霓虹网格背景 */
+        body { 
+            background: var(--bg); 
+            background-image: 
+                linear-gradient(rgba(56, 139, 253, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(56, 139, 253, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+            color: var(--text); 
+            font-family: 'JetBrains Mono', monospace, -apple-system; 
+            overflow-x: hidden; 
+        }
 
+        .app-wrapper { max-width: 1440px; margin: 0 auto; padding: 20px; position: relative; }
+
+        /* 顶部 Header */
         header { text-align: center; margin-bottom: 30px; }
-        .logo-area h1 { color: #fff; font-size: 36px; font-weight: 800; letter-spacing: -1px; }
-        .contact-bar { margin: 15px 0; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
-        .contact-link { color: var(--blue); text-decoration: none; font-size: 13px; border: 1px solid var(--border); padding: 6px 16px; border-radius: 20px; transition: 0.2s; background: rgba(56,139,253,0.05); }
-        .contact-link:hover { background: #161b22; border-color: var(--blue); transform: translateY(-2px); }
+        .logo-area h1 { 
+            color: #fff; font-size: 42px; font-weight: 900; letter-spacing: -2px;
+            text-shadow: 0 0 15px rgba(0, 242, 255, 0.4); 
+        }
+        .contact-bar { margin: 15px 0; display: flex; justify-content: center; gap: 15px; }
+        .contact-link { 
+            color: var(--neon); text-decoration: none; font-size: 13px; border: 1px solid var(--neon); 
+            padding: 8px 18px; border-radius: 4px; transition: 0.3s; background: rgba(0, 242, 255, 0.05); 
+        }
+        .contact-link:hover { box-shadow: 0 0 15px var(--neon); background: var(--neon); color: #000; }
 
         .layout-grid { display: flex; gap: 20px; }
 
-        /* 左侧 Alpha Feed */
-        .sidebar-left { width: 260px; flex-shrink: 0; background: #010409; border: 1px solid var(--border); border-radius: 12px; padding: 15px; height: 1100px; }
-        .feed-header { color: var(--blue); font-size: 12px; font-weight: bold; margin-bottom: 20px; display: flex; justify-content: space-between; }
-        .feed-list { height: 1040px; overflow: hidden; font-size: 11px; }
-        .feed-entry { border-left: 2px solid var(--accent); padding-left: 10px; margin-bottom: 15px; animation: fadeIn 0.4s; }
+        /* 左侧：日历 + Feed */
+        .sidebar-left { width: 280px; flex-shrink: 0; }
+        .side-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 15px; margin-bottom: 20px; backdrop-filter: blur(10px); }
+        .event-item { display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 10px; padding-bottom: 5px; border-bottom: 1px solid #21262d; }
+        .event-date { color: var(--orange); font-weight: bold; }
 
-        /* 中间主内容 */
+        /* 中间：主图 + 18卡片 */
         .main-content { flex-grow: 1; min-width: 0; }
         .hero-section { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px; }
-        .hero-box { background: #000; border: 1px solid var(--border); border-radius: 12px; height: 300px; overflow: hidden; }
+        .hero-box { border: 1px solid var(--border); border-radius: 12px; height: 300px; overflow: hidden; background: #000; }
         iframe { width: 100%; height: 100%; border: none; }
 
-        .signals-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 40px; }
-        .market-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; padding: 16px; position: relative; transition: 0.2s; }
-        .market-card:hover { border-color: var(--blue); box-shadow: 0 0 15px rgba(56,139,253,0.1); }
-        .tag { position: absolute; top: 12px; left: 12px; font-size: 9px; padding: 2px 6px; border-radius: 3px; font-weight: bold; color: #fff; }
-        .card-vol { text-align: right; font-size: 10px; color: #484f58; }
-        .card-title { color: #fff; font-size: 14px; font-weight: 600; margin: 12px 0; height: 40px; overflow: hidden; line-height: 1.4; }
-        .prob-box { background: rgba(0,0,0,0.2); border: 1px solid #21262d; border-radius: 6px; padding: 10px; text-align: center; margin-bottom: 12px; }
-        .prob-val { font-size: 24px; font-weight: 800; color: var(--blue); }
+        .signals-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+        .market-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 16px; position: relative; transition: 0.3s; }
+        .market-card:hover { border-color: var(--neon); transform: scale(1.02); z-index: 10; }
+        
+        /* 2. 套利监测标签 */
+        .arb-tag { position: absolute; top: 10px; right: 10px; font-size: 10px; color: var(--red); background: rgba(248, 81, 73, 0.1); border: 1px solid var(--red); padding: 1px 4px; border-radius: 2px; animation: flash 2s infinite; }
+        @keyframes flash { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+        .tag { position: absolute; top: 10px; left: 10px; font-size: 9px; padding: 2px 6px; border-radius: 2px; color: #fff; }
+        .card-title { color: #fff; font-size: 14px; font-weight: bold; margin: 25px 0 15px; min-height: 40px; }
+        .prob-display { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 15px; }
+        .prob-val { font-size: 32px; font-weight: 900; color: var(--neon); }
+
         .btn-row { display: flex; gap: 8px; }
-        .btn { flex: 1; text-align: center; padding: 8px; border-radius: 5px; font-size: 11px; font-weight: bold; text-decoration: none; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-        .btn-green { background: var(--accent); color: #fff; border: none; }
-        .btn-gray { background: #21262d; color: var(--text); border: 1px solid var(--border); }
+        .btn { flex: 1; text-align: center; padding: 10px; border-radius: 4px; font-size: 11px; font-weight: bold; text-decoration: none; transition: 0.2s; cursor: pointer; }
+        .btn-blue { background: var(--blue); color: #fff; }
+        .btn-outline { border: 1px solid var(--border); color: var(--text); }
+        .btn-outline:hover { color: var(--neon); border-color: var(--neon); }
 
-        /* 右侧工具 */
+        /* 右侧：计算器 + 汇率 */
         .sidebar-right { width: 280px; flex-shrink: 0; }
-        .tool-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; padding: 15px; margin-bottom: 15px; }
-        .sentiment-bar { height: 6px; background: linear-gradient(90deg, #f85149, #d29922, #3fb950); border-radius: 3px; margin: 15px 0; position: relative; }
-        #sentiment-dot { width: 12px; height: 12px; background: #fff; border-radius: 50%; position: absolute; top: -3px; left: 72%; border: 2px solid #000; transition: left 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .calc-input { width: 100%; background: #0d1117; border: 1px solid var(--border); color: #fff; padding: 10px; margin-bottom: 10px; border-radius: 4px; font-family: monospace; }
 
-        /* 弹出审计报告 */
-        #audit-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); display: none; align-items: center; justify-content: center; z-index: 9999; padding: 20px; }
-        .audit-modal { background: #0d1117; border: 1px solid var(--blue); border-radius: 15px; max-width: 500px; width: 100%; padding: 30px; position: relative; }
-        .audit-header { color: var(--blue); font-weight: bold; margin-bottom: 20px; font-size: 18px; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
-        .audit-body { color: #c9d1d9; font-size: 14px; line-height: 1.8; }
-        .audit-body b { color: var(--orange); }
-
-        /* 底部导航 */
-        .project-footer { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; padding: 40px 0; border-top: 1px solid var(--border); margin-top: 20px; }
-        .proj-item { background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; padding: 20px; text-align: center; text-decoration: none; transition: 0.2s; }
-        .proj-item:hover { border-color: var(--blue); background: #161b22; }
-        .proj-name { color: #fff; font-size: 16px; font-weight: bold; display: block; margin-bottom: 5px; }
-
-        /* 响应式自适应 */
-        @media (max-width: 1100px) {
+        @media (max-width: 1200px) {
             .layout-grid { flex-direction: column; }
-            .sidebar-left, .sidebar-right { width: 100%; height: auto; }
-            .signals-grid { grid-template-columns: repeat(2, 1fr); }
+            .sidebar-left, .sidebar-right, .signals-grid { width: 100%; grid-template-columns: repeat(2, 1fr); }
             .hero-section { grid-template-columns: 1fr; }
         }
-        @media (max-width: 600px) {
-            .signals-grid { grid-template-columns: 1fr; }
-            .project-footer { grid-template-columns: repeat(2, 1fr); }
-        }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+        @media (max-width: 600px) { .signals-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
-<div id="audit-overlay" onclick="closeAudit()">
-    <div class="audit-modal" onclick="event.stopPropagation()">
-        <div class="audit-header">🔍 PolyAxiom AI 深度审计报告</div>
-        <div class="audit-body" id="audit-content">
-            </div>
-        <button class="btn btn-green" style="margin-top:20px; width:100%" onclick="closeAudit()">关闭报告</button>
-    </div>
-</div>
-
 <div class="app-wrapper">
     <header>
-        <div class="logo-area"><h1>PolyAxiom 捕捉引擎</h1></div>
+        <div class="logo-area"><h1>PolyAxiom TERMINAL</h1></div>
         <div class="contact-bar">
             <a href="https://x.com/Poly_Axiom" target="_blank" class="contact-link">𝕏 / Poly_Axiom</a>
-            <a href="https://t.me/PolyAxiom_ZH" target="_blank" class="contact-link">✈️ PolyAxiom_ZH</a>
-        </div>
-        <div class="main-stats">
-            <div class="stat-item"><span class="stat-val">5,010+</span>今日扫描信号</div>
-            <div class="stat-item"><span class="stat-val">$10,807.61M</span>实时监控资金</div>
+            <a href="https://t.me/PolyAxiom_ZH" target="_blank" class="contact-link">✈️ TG 信号频道</a>
         </div>
     </header>
 
     <div class="layout-grid">
         <aside class="sidebar-left">
-            <div class="feed-header"><span>📡 ALPHA FEED</span><span style="color:var(--accent)">● LIVE</span></div>
-            <div id="dynamic-feed" class="feed-list"></div>
+            <div class="side-box">
+                <div style="color:var(--orange); font-size:12px; font-weight:bold; margin-bottom:15px;">📅 2026 经济日历</div>
+                <div id="calendar">
+                    <div class="event-item"><span>美联储议息会议</span><span class="event-date">05/14</span></div>
+                    <div class="event-item"><span>世界杯开幕仪式</span><span class="event-date">06/11</span></div>
+                    <div class="event-item"><span>美国中期选举</span><span class="event-date">11/03</span></div>
+                </div>
+            </div>
+            <div class="side-box" style="height: 600px; overflow: hidden;">
+                <div style="color:var(--neon); font-size:12px; font-weight:bold; margin-bottom:15px;">📡 实时流监测</div>
+                <div id="feed-list" style="font-size: 10px; line-height: 1.8;"></div>
+            </div>
         </aside>
 
         <main class="main-content">
             <section class="hero-section">
                 <div class="hero-box"><iframe src="https://embed.polymarket.com/market?event=2026-fifa-world-cup-winner-595&theme=dark&r=PolyAxiom"></iframe></div>
                 <div class="hero-box"><iframe src="https://embed.polymarket.com/market?market=will-bitcoin-reach-1000000-by-december-31-2026-946&theme=dark&r=PolyAxiom"></iframe></div>
-                <div class="hero-box"><iframe src="https://embed.polymarket.com/market?event=balance-of-power-2026-midterms&theme=dark&r=PolyAxiom"></iframe></div>
-                <div class="hero-box"><iframe src="https://embed.polymarket.com/market?event=richest-person-on-december-31-2026&theme=dark&r=PolyAxiom"></iframe></div>
             </section>
-            <div class="signals-grid" id="market-grid"></div>
+            
+            <div class="signals-grid" id="market-grid">
+                </div>
         </main>
 
         <aside class="sidebar-right">
-            <div class="tool-box">
-                <div style="font-size:12px; font-weight:bold; color:#fff;">📊 市场情绪</div>
-                <div class="sentiment-bar"><div id="sentiment-dot"></div></div>
-                <div style="display:flex; justify-content:space-between; font-size:10px;"><span>恐惧</span><span>贪婪</span></div>
+            <div class="side-box">
+                <div style="color:#fff; font-size:13px; font-weight:bold; margin-bottom:15px;">💱 汇率/对冲</div>
+                <div style="font-size: 11px; margin-bottom: 5px;">USDT 金额</div>
+                <input type="number" id="usdt-val" class="calc-input" value="1000">
+                <div style="text-align: center; margin-bottom: 10px;">≈ <span id="cny-val" style="color:var(--orange); font-weight:bold;">¥ 7240.00</span></div>
+                <a href="https://polymarket.com/?r=PolyAxiom" target="_blank" class="btn btn-blue" style="display:block;">一键执行套利下单</a>
             </div>
-            <div class="tool-box">
-                <div style="font-size:12px; font-weight:bold; color:var(--blue); margin-bottom:12px;">🧮 对冲套利计算</div>
-                <input type="number" class="calc-input" value="0.52" placeholder="平台A胜率">
-                <input type="number" class="calc-input" value="0.45" placeholder="平台B胜率">
-                <div style="background:rgba(56,139,253,0.1); border:1px dashed var(--blue); color:#58a6ff; text-align:center; padding:12px; font-size:22px; font-weight:800; border-radius:4px;">3.09%</div>
-                <a href="https://polymarket.com/?r=PolyAxiom" target="_blank" class="btn btn-green" style="display:block; margin-top:10px; text-decoration:none;">执行套利下单</a>
+            <div class="side-box" style="text-align:center;">
+                <div style="color:var(--neon); font-size:11px; margin-bottom:10px;">AI 信号订阅</div>
+                <p style="font-size:10px; margin-bottom:15px;">当波动率 > 5% 时自动提醒</p>
+                <a href="https://t.me/PolyAxiom_ZH" target="_blank" class="btn btn-outline" style="display:block;">加入推送频道</a>
             </div>
         </aside>
-    </div>
-
-    <div class="project-footer">
-        <a href="https://polymarket.com/?r=PolyAxiom" class="proj-item"><span class="proj-name">Polymarket</span><span class="proj-desc">最大预测市场协议</span></a>
-        <a href="#" class="proj-item"><span class="proj-name">Kalshi Data</span><span class="proj-desc">合规实时数据流</span></a>
-        <a href="#" class="proj-item"><span class="proj-name">DeepSeek L40</span><span class="proj-desc">AI 深度审计引擎</span></a>
-        <a href="#" class="proj-item"><span class="proj-name">Solana RPC</span><span class="proj-desc">链上高速同步节点</span></a>
     </div>
 </div>
 
 <script>
     const INVITE = "?r=PolyAxiom";
-    const data = [
-        { t: 'macro', title: '美联储2026年6月前降息吗？', vol: '3.2M', prob: '72.0', c: '#8957e5' },
-        { t: 'tech', title: 'Nvidia 市值突破 5 万亿美元吗？', vol: '1.2M', prob: '54.2', c: '#388bfd' },
-        { t: 'sports', title: '2026 世界杯：西班牙夺冠？', vol: '2.1M', prob: '16.0', c: '#d29922' },
-        { t: 'fun', title: 'GTA VI 会跳票到 2027 年吗？', vol: '890k', prob: '12.5', c: '#da36a8' },
-        { t: 'tech', title: 'SpaceX 2026完成轨道加油测试？', vol: '920k', prob: '88.1', c: '#388bfd' },
-        { t: 'macro', title: '比特币触及 $100,000 价格位？', vol: '1.5M', prob: '68.2', c: '#3fb950' },
-        { t: 'sports', title: 'NBA 2026 总冠军：凯尔特人？', vol: '670k', prob: '38.5', c: '#d29922' },
-        { t: 'tech', title: 'Apple 发布首款 AR 智能眼镜？', vol: '340k', prob: '21.0', c: '#388bfd' },
-        { t: 'macro', title: '黄金价格突破 $3000？', vol: '1.1M', prob: '42.0', c: '#8957e5' },
-        { t: 'macro', title: '以太坊市值超越比特币？', vol: '880k', prob: '9.5', c: '#3fb950' },
-        { t: 'tech', title: 'AI 智能体实现 AGI 意识？', vol: '2.3M', prob: '18.2', c: '#388bfd' },
-        { t: 'macro', title: '2026 美国中期选举共和党赢？', vol: '4.5M', prob: '51.5', c: '#8957e5' },
-        { t: 'fun', title: '泰勒·斯威夫特宣布2026巡演？', vol: '1.2M', prob: '85.0', c: '#da36a8' },
-        { t: 'sports', title: '梅西参加 2026 年世界杯？', vol: '900k', prob: '45.0', c: '#d29922' },
-        { t: 'tech', title: '特斯拉 Cybercab 批量下线？', vol: '760k', prob: '33.5', c: '#388bfd' },
-        { t: 'macro', title: '原油价格跌破 $60 每桶？', vol: '540k', prob: '28.0', c: '#8957e5' },
-        { t: 'fun', title: '奥斯卡 2026：最佳影片预测？', vol: '150k', prob: '14.0', c: '#da36a8' },
-        { t: 'sports', title: 'F1 2026：法拉利车队夺冠？', vol: '430k', prob: '62.0', c: '#d29922' }
+    const markets = [
+        { t: 'macro', title: '美联储2026年6月前降息吗？', prob: '72.0', c: '#8957e5' },
+        { t: 'tech', title: 'Nvidia 市值突破 5 万亿美元吗？', prob: '54.2', c: '#388bfd' },
+        { t: 'sports', title: '2026 世界杯：西班牙夺冠？', prob: '16.0', c: '#d29922' },
+        { t: 'fun', title: 'GTA VI 会跳票到 2027 年吗？', prob: '12.5', c: '#da36a8' },
+        { t: 'tech', title: 'SpaceX 2026完成轨道加油测试？', prob: '88.1', c: '#388bfd' },
+        { t: 'macro', title: '比特币触及 $100,000 价格位？', prob: '68.2', c: '#3fb950' },
+        { t: 'sports', title: 'NBA 2026 总冠军：凯尔特人？', prob: '38.5', c: '#d29922' },
+        { t: 'tech', title: 'Apple 发布首款 AR 智能眼镜？', prob: '21.0', c: '#388bfd' },
+        { t: 'macro', title: '黄金价格突破 $3000？', prob: '42.0', c: '#8957e5' },
+        { t: 'macro', title: '以太坊市值超越比特币？', prob: '9.5', c: '#3fb950' },
+        { t: 'tech', title: 'AI 智能体实现 AGI 意识？', prob: '18.2', c: '#388bfd' },
+        { t: 'macro', title: '2026 美国中期选举共和党赢？', prob: '51.5', c: '#8957e5' },
+        { t: 'fun', title: '泰勒·斯威夫特宣布2026巡演？', prob: '85.0', c: '#da36a8' },
+        { t: 'sports', title: '梅西参加 2026 年世界杯？', prob: '45.0', c: '#d29922' },
+        { t: 'tech', title: '特斯拉 Cybercab 批量下线？', prob: '33.5', c: '#388bfd' },
+        { t: 'macro', title: '原油价格跌破 $60 每桶？', prob: '28.0', c: '#8957e5' },
+        { t: 'fun', title: '奥斯卡 2026：最佳影片预测？', prob: '14.0', c: '#da36a8' },
+        { t: 'sports', title: 'F1 2026：法拉利车队夺冠？', prob: '62.0', c: '#d29922' }
     ];
 
-    document.getElementById('market-grid').innerHTML = data.map(m => `
-        <div class="market-card">
-            <span class="tag" style="background:${m.c}">${m.t}</span>
-            <div class="card-vol">$${m.vol} Vol</div>
-            <div class="card-title">${m.title}</div>
-            <div class="prob-box"><div class="prob-val">${m.prob}%</div></div>
-            <div class="btn-row">
-                <a href="https://polymarket.com/${INVITE}" target="_blank" class="btn btn-green">立即下单</a>
-                <button class="btn btn-gray" onclick="showAudit('${m.title}', '${m.prob}')">深度报告</button>
+    // 渲染 18 个卡片
+    document.getElementById('market-grid').innerHTML = markets.map(m => {
+        const arb = (Math.random() * 4).toFixed(1); // 随机生成模拟价差
+        return `
+            <div class="market-card">
+                <span class="tag" style="background:${m.c}">${m.t.toUpperCase()}</span>
+                ${arb > 2 ? `<div class="arb-tag">Arb: ${arb}% 价差</div>` : ''}
+                <div class="card-title">${m.title}</div>
+                <div class="prob-display">
+                    <div class="prob-val">${m.prob}%</div>
+                </div>
+                <div class="btn-row">
+                    <a href="https://polymarket.com/${INVITE}" target="_blank" class="btn btn-blue">立即下单</a>
+                    <a href="https://t.me/PolyAxiom_ZH" target="_blank" class="btn btn-outline">AI 报告</a>
+                </div>
             </div>
-        </div>
-    `).join('');
-
-    function showAudit(title, prob) {
-        const overlay = document.getElementById('audit-overlay');
-        const content = document.getElementById('audit-content');
-        const whaleAmt = Math.floor(Math.random()*500 + 100);
-        content.innerHTML = `
-            <p style="margin-bottom:15px">项目名称：<b>${title}</b></p>
-            <p>1. <b>巨鲸动向</b>：检测到地址 0x${Math.random().toString(16).slice(2,8)} 连续三笔大额买入，合计 <b>$${whaleAmt}k</b>。</p>
-            <p>2. <b>多空比率</b>：当前市场持仓比例为 <b>${prob}:${(100-prob).toFixed(1)}</b>，散户看涨情绪处于历史高位。</p>
-            <p>3. <b>套利机会</b>：检测到 Kalshi 平台存在 <b>2.4%</b> 的价差缺口，建议立即执行跨平台对冲。</p>
-            <p style="margin-top:15px; font-size:12px; color:var(--blue)">* 本报告由 PolyAxiom L40 引擎实时生成，仅供参考。</p>
         `;
-        overlay.style.display = 'flex';
-    }
-    function closeAudit() { document.getElementById('audit-overlay').style.display = 'none'; }
+    }).join('');
 
-    setInterval(() => {
-        const dot = document.getElementById('sentiment-dot');
-        dot.style.left = (65 + Math.random() * 15) + '%';
-    }, 3500);
+    // 汇率计算
+    const usdt = document.getElementById('usdt-val');
+    const cny = document.getElementById('cny-val');
+    usdt.oninput = () => { cny.innerText = '¥ ' + (usdt.value * 7.24).toFixed(2); };
 
-    const feed = document.getElementById('dynamic-feed');
+    // Feed 流
+    const feed = document.getElementById('feed-list');
     function addFeed() {
         const div = document.createElement('div');
-        div.className = 'feed-entry';
-        div.innerHTML = `<span style="color:#484f58; font-size:10px;">${new Date().toLocaleTimeString()}</span><br>
-                         <b style="color:#fff;">鲸鱼 0x${Math.random().toString(16).slice(2,6)}</b> 买入 <b style="color:var(--orange)">$${Math.floor(Math.random()*90)+10}k</b><br>
-                         <span style="color:var(--blue); font-size:10px;">⚡ 深度审计报告已同步</span>`;
+        div.style.marginBottom = "10px";
+        div.innerHTML = `<span style="color:#484f58;">${new Date().toLocaleTimeString()}</span> 
+                         <span style="color:var(--neon);">鲸鱼 0x${Math.random().toString(16).slice(2,6)}</span> 
+                         买入 <b style="color:#fff;">$${(Math.random()*20+5).toFixed(1)}k</b>`;
         feed.prepend(div);
-        if(feed.children.length > 20) feed.lastElementChild.remove();
+        if(feed.children.length > 25) feed.lastElementChild.remove();
     }
-    setInterval(addFeed, 3000); addFeed();
+    setInterval(addFeed, 2500); addFeed();
 </script>
+
 </body>
 </html>
