@@ -13,10 +13,6 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; overflow-x: hidden; }
         
-        /* 驗證遮罩層 */
-        #authOverlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg); z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; backdrop-filter: blur(20px); }
-        .auth-card { background: var(--card-bg); padding: 40px; border-radius: 15px; border: 1px solid var(--blue); text-align: center; box-shadow: 0 0 50px rgba(56, 139, 253, 0.15); }
-
         .app-container { max-width: 1400px; margin: 0 auto; padding: 20px; }
 
         /* 跑馬燈公告 */
@@ -31,7 +27,7 @@
         .nav-btn { background: #161b22; border: 1px solid var(--border); color: var(--blue); padding: 6px 16px; border-radius: 6px; text-decoration: none; font-size: 14px; transition: 0.3s; cursor: pointer; }
         .nav-btn:hover { border-color: var(--blue); background: #21262d; box-shadow: 0 0 15px rgba(56, 139, 253, 0.2); }
 
-        /* 市場卡片核心 */
+        /* 頂部大型看板 */
         .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px; }
         .hero-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 25px; position: relative; backdrop-filter: blur(15px); overflow: hidden; }
         .progress-container { height: 45px; display: flex; border-radius: 8px; overflow: hidden; margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.05); }
@@ -45,7 +41,7 @@
         .market-card.high-arb::before { background: radial-gradient(circle, rgba(248, 81, 73, 0.12) 0%, transparent 60%); animation: pulse-red 2.5s infinite ease-in-out; }
         @keyframes pulse-red { 0%, 100% { opacity: 0.3; } 50% { opacity: 0.7; } }
 
-        /* 佈局 */
+        /* 主佈局 */
         .main-layout { display: flex; gap: 20px; }
         .market-grid { flex: 1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
         .sidebar { width: 320px; display: flex; flex-direction: column; gap: 20px; }
@@ -64,19 +60,9 @@
 </head>
 <body>
 
-<div id="authOverlay">
-    <div class="auth-card">
-        <h2 style="color:#fff; margin-bottom:20px;">PolyAxiom 私人終端</h2>
-        <input type="password" id="inviteCodeInput" placeholder="請輸入邀請碼" style="background:#010409; border:1px solid var(--blue); color:#fff; padding:12px; border-radius:6px; outline:none; text-align:center; width:200px;">
-        <br><br>
-        <button onclick="checkInvite()" style="background:var(--blue); color:#fff; border:none; padding:10px 40px; border-radius:4px; cursor:pointer; font-weight:bold;">驗證進入</button>
-        <p style="color:var(--text); margin-top:20px; font-size:12px;">獲取邀請碼請聯繫 Telegram：@Teny_Admin</p>
-    </div>
-</div>
-
 <div class="ticker-wrap">
     <div class="ticker">
-        🚀 [系統]：PolyAxiom v2.5 引擎已上線，邀請碼模式已啟動 | 🔥 [熱點]：Nvidia 下季財報極度樂觀 | 📈 [套利]：BTC 多平台價差監控中...
+        🚀 [系統]：PolyAxiom v2.5 核心已就緒 | 🔥 [熱點]：Nvidia 財報樂觀 | 📈 [套利]：BTC 價差捕捉中 | ⚠️ [重要]：所有交易已掛載邀請碼 polyaxiom
     </div>
 </div>
 
@@ -153,40 +139,28 @@
 </div>
 
 <script>
-    const INVITE_CODE = "polyaxiom";
+    const REF_CODE = "polyaxiom";
 
-    // 驗證邏輯
-    function checkInvite() {
-        const input = document.getElementById('inviteCodeInput').value;
-        if(input.toLowerCase() === INVITE_CODE) {
-            document.getElementById('authOverlay').style.display = 'none';
-            localStorage.setItem('pa_auth', 'true');
-            appendInviteToLinks();
-        } else {
-            alert('邀請碼錯誤');
-        }
-    }
-
-    // 自動補全鏈接邀請碼
-    function appendInviteToLinks() {
+    // 自动挂载 Polymarket 邀请码逻辑
+    function applyRefCode() {
         const links = document.querySelectorAll('a[href*="polymarket.com"]');
         links.forEach(link => {
-            let url = new URL(link.href);
-            url.searchParams.set('r', INVITE_CODE);
-            link.href = url.toString();
+            try {
+                let url = new URL(link.href);
+                url.searchParams.set('r', REF_CODE);
+                link.href = url.toString();
+            } catch(e) { console.error("URL 格式錯誤"); }
         });
     }
 
-    // 初始化檢查
+    // 初始化渲染
     window.onload = () => {
-        if(localStorage.getItem('pa_auth') === 'true') {
-            document.getElementById('authOverlay').style.display = 'none';
-            appendInviteToLinks();
-        }
         renderMarkets();
+        applyRefCode();
+        // 持续检测（防止后续动态添加的内容漏掉）
+        setInterval(applyRefCode, 2000);
     };
 
-    // 渲染市場
     function renderMarkets() {
         const markets = [
             { type: 'MACRO', arb: '3.2%', q: '美聯儲2026年6月前降息嗎？', p: '72.0%', link: 'https://polymarket.com/event/fed-cut' },
@@ -208,15 +182,12 @@
                 </div>
             </div>
         `).join('');
-        appendInviteToLinks();
     }
 
-    // 換算器
     document.getElementById('usdInput').addEventListener('input', (e) => {
         document.getElementById('cnyRes').innerText = `¥ ${(e.target.value * 7.24).toFixed(2)}`;
     });
 
-    // 審計特效
     function runAudit(title) {
         const modal = document.getElementById('auditModal');
         const log = document.getElementById('auditLog');
@@ -234,7 +205,7 @@
                 p.innerText = line;
                 log.appendChild(p);
                 if(i === lines.length - 1) {
-                    setTimeout(() => { score.innerText = "建議：當前具備套利空間，建議買入。"; score.style.opacity = '1'; }, 500);
+                    setTimeout(() => { score.innerText = "分析完成：已掛載 polyaxiom 邀請碼，確保最佳收益回扣。"; score.style.opacity = '1'; }, 500);
                 }
             }, i * 600);
         });
