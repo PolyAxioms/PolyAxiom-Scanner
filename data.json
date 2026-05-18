@@ -1,75 +1,12 @@
 [
     {
-        "title": "SCOTUS accepts sports event contract case by...?     ",
-        "odds": 13.5,
-        "volume": 937.4,
+        "title": "Will any 2026 FIFA World Cup game scheduled in the U.S. be relocated abroad?",
+        "odds": 7.5,
+        "volume": 10.9,
         "is_hot": true,
         "is_whale": false,
-        "link": "https://polymarket.com/event/scotus-accepts-sports-event-contract-case-by-july-31-2026?r=Axiomcom",
-        "rand_score": 9.853140230122595
-    },
-    {
-        "title": "UEFA Europa League: Winner ",
-        "odds": 73.5,
-        "volume": 4340.7,
-        "is_hot": true,
-        "is_whale": false,
-        "link": "https://polymarket.com/event/uefa-europa-league-winner?r=Axiomcom",
-        "rand_score": 8.199671207784373
-    },
-    {
-        "title": "Will Trump resign by December 31, 2026?",
-        "odds": 6.5,
-        "volume": 431.6,
-        "is_hot": true,
-        "is_whale": false,
-        "link": "https://polymarket.com/event/will-trump-resign-by-december-31-2026?r=Axiomcom",
-        "rand_score": 7.978090528359269
-    },
-    {
-        "title": "Putin out as President of Russia by December 31, 2026?",
-        "odds": 11.5,
-        "volume": 4270.3,
-        "is_hot": true,
-        "is_whale": false,
-        "link": "https://polymarket.com/event/putin-out-before-2027?r=Axiomcom",
-        "rand_score": 7.71155335436632
-    },
-    {
-        "title": "Will Trump be impeached by end of 2026?",
-        "odds": 13.0,
-        "volume": 709.2,
-        "is_hot": true,
-        "is_whale": false,
-        "link": "https://polymarket.com/event/will-trump-be-impeached-by-december-31-2026?r=Axiomcom",
-        "rand_score": 7.67855693925136
-    },
-    {
-        "title": "Netanyahu out by...?",
-        "odds": 43.5,
-        "volume": 120489.8,
-        "is_hot": true,
-        "is_whale": false,
-        "link": "https://polymarket.com/event/netanyahu-out-before-2027?r=Axiomcom",
-        "rand_score": 7.581314543763008
-    },
-    {
-        "title": "Xi Jinping out before 2027?",
-        "odds": 7.0,
-        "volume": 9432.4,
-        "is_hot": true,
-        "is_whale": false,
-        "link": "https://polymarket.com/event/xi-jinping-out-before-2027?r=Axiomcom",
-        "rand_score": 7.430575077235483
-    },
-    {
-        "title": "NBA Playoffs: Eastern Conference Champion ",
-        "odds": 11.5,
-        "volume": 17123.0,
-        "is_hot": true,
-        "is_whale": false,
-        "link": "https://polymarket.com/event/nba-playoffs-eastern-conference-champion?r=Axiomcom",
-        "rand_score": 7.372880083233291
+        "link": "https://polymarket.com/event/will-any-2026-fifa-world-cup-game-scheduled-in-the-us-be-relocated-abroad?r=Axiomcom",
+        "rand_score": 9.521366311610436
     },
     {
         "title": "LALIGA:  Top Goalscorer ",
@@ -78,34 +15,16 @@
         "is_hot": true,
         "is_whale": false,
         "link": "https://polymarket.com/event/laliga-top-goalscorer?r=Axiomcom",
-        "rand_score": 5.4359386499295335
+        "rand_score": 9.438718880884034
     },
     {
-        "title": "NBA Playoffs:  Western Conference Champion ",
-        "odds": 68.5,
-        "volume": 21607.0,
+        "title": "Netanyahu out by...?",
+        "odds": 43.5,
+        "volume": 120492.1,
         "is_hot": true,
         "is_whale": false,
-        "link": "https://polymarket.com/event/nba-playoffs-western-conference-champion?r=Axiomcom",
-        "rand_score": 5.349290744234137
-    },
-    {
-        "title": "2026 FIFA World Cup Winner ",
-        "odds": 16.7,
-        "volume": 1013864.9,
-        "is_hot": true,
-        "is_whale": false,
-        "link": "https://polymarket.com/event/2026-fifa-world-cup-winner-595?r=Axiomcom",
-        "rand_score": 5.1356419879344175
-    },
-    {
-        "title": "Serie A - Which Clubs Get Relegated?",
-        "odds": 58.5,
-        "volume": 18.8,
-        "is_hot": true,
-        "is_whale": false,
-        "link": "https://polymarket.com/event/serie-a-which-clubs-get-relegated?r=Axiomcom",
-        "rand_score": 4.686131054339114
+        "link": "https://polymarket.com/event/netanyahu-out-before-2027?r=Axiomcom",
+        "rand_score": 8.841488130653838
     },
     {
         "title": "Will Trump pardon Ghislaine Maxwell by end of 2026?",
@@ -114,7 +33,16 @@
         "is_hot": true,
         "is_whale": false,
         "link": "https://polymarket.com/event/will-trump-pardon-ghislaine-maxwell?r=Axiomcom",
-        "rand_score": 4.546349585399216
+        "rand_score": 8.52410138426555
+    },
+    {
+        "title": "2026 FIFA World Cup Winner ",
+        "odds": 16.7,
+        "volume": 1014308.9,
+        "is_hot": true,
+        "is_whale": false,
+        "link": "https://polymarket.com/event/2026-fifa-world-cup-winner-595?r=Axiomcom",
+        "rand_score": 8.427640976302802
     },
     {
         "title": "Will any presidential candidate win outright in the first round of the Colombia's election?",
@@ -123,43 +51,61 @@
         "is_hot": true,
         "is_whale": false,
         "link": "https://polymarket.com/event/will-any-presidential-candidate-win-outright-in-the-first-round-of-the-colombias-election?r=Axiomcom",
-        "rand_score": 4.129048214730085
+        "rand_score": 8.131220669922449
     },
     {
         "title": "2026 NBA Champion",
         "odds": 58.5,
-        "volume": 387137.4,
+        "volume": 387415.8,
         "is_hot": true,
         "is_whale": false,
         "link": "https://polymarket.com/event/2026-nba-champion?r=Axiomcom",
-        "rand_score": 4.026031580012134
+        "rand_score": 7.998054194025016
     },
     {
-        "title": "Will China invade Taiwan by end of 2026?",
-        "odds": 7.4,
-        "volume": 23356.2,
+        "title": "Harvey Weinstein prison time?",
+        "odds": 78.4,
+        "volume": 995.5,
         "is_hot": true,
         "is_whale": false,
-        "link": "https://polymarket.com/event/will-china-invade-taiwan-before-2027?r=Axiomcom",
-        "rand_score": 3.62624549102477
+        "link": "https://polymarket.com/event/harvey-weinstein-prison-time?r=Axiomcom",
+        "rand_score": 7.066948770318607
     },
     {
-        "title": "Balance of Power: 2026 Midterms",
-        "odds": 44.5,
-        "volume": 6832.6,
+        "title": "Will Trump resign by December 31, 2026?",
+        "odds": 6.5,
+        "volume": 431.6,
         "is_hot": true,
         "is_whale": false,
-        "link": "https://polymarket.com/event/balance-of-power-2026-midterms?r=Axiomcom",
-        "rand_score": 3.606197141855282
+        "link": "https://polymarket.com/event/will-trump-resign-by-december-31-2026?r=Axiomcom",
+        "rand_score": 6.626676672325935
     },
     {
-        "title": "Which party will win the Senate in 2026?",
-        "odds": 46.5,
-        "volume": 2407.0,
+        "title": "2026 NHL Stanley Cup Champion ",
+        "odds": 37.5,
+        "volume": 77705.2,
         "is_hot": true,
         "is_whale": false,
-        "link": "https://polymarket.com/event/which-party-will-win-the-senate-in-2026?r=Axiomcom",
-        "rand_score": 3.5947637202706586
+        "link": "https://polymarket.com/event/2026-nhl-stanley-cup-champion?r=Axiomcom",
+        "rand_score": 6.433212293142717
+    },
+    {
+        "title": "Xi Jinping out before 2027?",
+        "odds": 7.0,
+        "volume": 9432.4,
+        "is_hot": true,
+        "is_whale": false,
+        "link": "https://polymarket.com/event/xi-jinping-out-before-2027?r=Axiomcom",
+        "rand_score": 6.427152392057969
+    },
+    {
+        "title": "Putin out as President of Russia by December 31, 2026?",
+        "odds": 11.5,
+        "volume": 4270.3,
+        "is_hot": true,
+        "is_whale": false,
+        "link": "https://polymarket.com/event/putin-out-before-2027?r=Axiomcom",
+        "rand_score": 5.440570656909535
     },
     {
         "title": "Erdoğan out by December 31, 2026?",
@@ -168,16 +114,61 @@
         "is_hot": true,
         "is_whale": false,
         "link": "https://polymarket.com/event/erdoan-out-before-2027?r=Axiomcom",
-        "rand_score": 3.3851854229286307
+        "rand_score": 5.243266346188696
     },
     {
-        "title": "Harvey Weinstein prison time?",
-        "odds": 78.0,
-        "volume": 995.4,
+        "title": "Which party will win the Senate in 2026?",
+        "odds": 46.5,
+        "volume": 2407.0,
         "is_hot": true,
         "is_whale": false,
-        "link": "https://polymarket.com/event/harvey-weinstein-prison-time?r=Axiomcom",
-        "rand_score": 2.6746244550995035
+        "link": "https://polymarket.com/event/which-party-will-win-the-senate-in-2026?r=Axiomcom",
+        "rand_score": 5.202040265151472
+    },
+    {
+        "title": "SCOTUS accepts sports event contract case by...?     ",
+        "odds": 13.5,
+        "volume": 937.4,
+        "is_hot": true,
+        "is_whale": false,
+        "link": "https://polymarket.com/event/scotus-accepts-sports-event-contract-case-by-july-31-2026?r=Axiomcom",
+        "rand_score": 4.571145771907038
+    },
+    {
+        "title": "Serie A - Which Clubs Get Relegated?",
+        "odds": 58.5,
+        "volume": 18.8,
+        "is_hot": true,
+        "is_whale": false,
+        "link": "https://polymarket.com/event/serie-a-which-clubs-get-relegated?r=Axiomcom",
+        "rand_score": 3.752352033706078
+    },
+    {
+        "title": "Will Trump be impeached by end of 2026?",
+        "odds": 13.0,
+        "volume": 709.2,
+        "is_hot": true,
+        "is_whale": false,
+        "link": "https://polymarket.com/event/will-trump-be-impeached-by-december-31-2026?r=Axiomcom",
+        "rand_score": 2.4038684930914522
+    },
+    {
+        "title": "Will China invade Taiwan by end of 2026?",
+        "odds": 7.4,
+        "volume": 23356.2,
+        "is_hot": true,
+        "is_whale": false,
+        "link": "https://polymarket.com/event/will-china-invade-taiwan-before-2027?r=Axiomcom",
+        "rand_score": 2.0866789369717
+    },
+    {
+        "title": "NBA Playoffs: Eastern Conference Champion ",
+        "odds": 28.5,
+        "volume": 17157.0,
+        "is_hot": true,
+        "is_whale": false,
+        "link": "https://polymarket.com/event/nba-playoffs-eastern-conference-champion?r=Axiomcom",
+        "rand_score": 1.8685389038617817
     },
     {
         "title": "Zelenskyy out as Ukraine president by end of 2026?",
@@ -186,69 +177,78 @@
         "is_hot": true,
         "is_whale": false,
         "link": "https://polymarket.com/event/zelenskyy-out-as-ukraine-president-before-2027?r=Axiomcom",
-        "rand_score": 2.191266880129522
+        "rand_score": 1.613475459571685
     },
     {
-        "title": "2026 NHL Stanley Cup Champion ",
-        "odds": 37.5,
-        "volume": 77702.1,
+        "title": "NBA Playoffs:  Western Conference Champion ",
+        "odds": 68.5,
+        "volume": 21623.0,
         "is_hot": true,
         "is_whale": false,
-        "link": "https://polymarket.com/event/2026-nhl-stanley-cup-champion?r=Axiomcom",
-        "rand_score": 0.7432584297950595
+        "link": "https://polymarket.com/event/nba-playoffs-western-conference-champion?r=Axiomcom",
+        "rand_score": 1.4006693063889464
     },
     {
-        "title": "Will any 2026 FIFA World Cup game scheduled in the U.S. be relocated abroad?",
-        "odds": 7.5,
-        "volume": 10.9,
+        "title": "Balance of Power: 2026 Midterms",
+        "odds": 44.5,
+        "volume": 6834.9,
         "is_hot": true,
         "is_whale": false,
-        "link": "https://polymarket.com/event/will-any-2026-fifa-world-cup-game-scheduled-in-the-us-be-relocated-abroad?r=Axiomcom",
-        "rand_score": 0.10420896525788148
+        "link": "https://polymarket.com/event/balance-of-power-2026-midterms?r=Axiomcom",
+        "rand_score": 1.1704661810895867
     },
     {
-        "title": "Republican Presidential Nominee 2028",
-        "odds": 2.4,
-        "volume": 620442.1,
-        "is_hot": false,
+        "title": "UEFA Europa League: Winner ",
+        "odds": 73.5,
+        "volume": 4340.8,
+        "is_hot": true,
         "is_whale": false,
-        "link": "https://polymarket.com/event/republican-presidential-nominee-2028?r=Axiomcom",
-        "rand_score": 8.897486443530033
+        "link": "https://polymarket.com/event/uefa-europa-league-winner?r=Axiomcom",
+        "rand_score": 0.06534670374074625
     },
     {
         "title": "Democratic Presidential Nominee 2028",
         "odds": 1.1,
-        "volume": 1146122.0,
+        "volume": 1146178.9,
         "is_hot": false,
         "is_whale": false,
         "link": "https://polymarket.com/event/democratic-presidential-nominee-2028?r=Axiomcom",
-        "rand_score": 7.3524556659372635
+        "rand_score": 8.365940476304088
     },
     {
         "title": "Presidential Election Winner 2028",
         "odds": 0.5,
-        "volume": 584542.3,
+        "volume": 584578.2,
         "is_hot": false,
         "is_whale": false,
         "link": "https://polymarket.com/event/presidential-election-winner-2028?r=Axiomcom",
-        "rand_score": 4.937320039764099
+        "rand_score": 8.277115213318604
+    },
+    {
+        "title": "GTA VI released before June 2026?",
+        "odds": 0.5,
+        "volume": 14369.3,
+        "is_hot": false,
+        "is_whale": false,
+        "link": "https://polymarket.com/event/gta-vi-released-before-june-2026?r=Axiomcom",
+        "rand_score": 7.724763250540413
+    },
+    {
+        "title": "Republican Presidential Nominee 2028",
+        "odds": 2.4,
+        "volume": 620893.7,
+        "is_hot": false,
+        "is_whale": false,
+        "link": "https://polymarket.com/event/republican-presidential-nominee-2028?r=Axiomcom",
+        "rand_score": 5.768924199675717
     },
     {
         "title": "Next James Bond actor?",
         "odds": 0.7,
-        "volume": 2186.8,
+        "volume": 2186.9,
         "is_hot": false,
         "is_whale": false,
         "link": "https://polymarket.com/event/next-james-bond-actor-635?r=Axiomcom",
-        "rand_score": 3.8971067952576623
-    },
-    {
-        "title": "LALIGA: Which Clubs Get Relegated?",
-        "odds": 5.0,
-        "volume": 37.2,
-        "is_hot": false,
-        "is_whale": false,
-        "link": "https://polymarket.com/event/laliga-which-clubs-get-relegated?r=Axiomcom",
-        "rand_score": 2.2132428326971243
+        "rand_score": 3.905674108389532
     }
 ]
