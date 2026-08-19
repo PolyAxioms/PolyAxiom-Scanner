@@ -1,93 +1,12 @@
 [
     {
-        "title": "Democratic Presidential Nominee 2028",
-        "odds": 15.7,
-        "volume": 1262331.9,
-        "is_hot": true,
-        "is_whale": false,
-        "link": "https://polymarket.com/event/democratic-presidential-nominee-2028?r=Axiomcom",
-        "rand_score": 9.926935782236747
-    },
-    {
-        "title": "Balance of Power: 2026 Midterms",
-        "odds": 47.5,
-        "volume": 10146.0,
-        "is_hot": true,
-        "is_whale": false,
-        "link": "https://polymarket.com/event/balance-of-power-2026-midterms?r=Axiomcom",
-        "rand_score": 9.828225481634535
-    },
-    {
-        "title": "US recession by end of 2026?",
-        "odds": 7.5,
-        "volume": 1708.7,
-        "is_hot": true,
-        "is_whale": false,
-        "link": "https://polymarket.com/event/us-recession-by-end-of-2026?r=Axiomcom",
-        "rand_score": 9.569054342092095
-    },
-    {
-        "title": "How many Fed rate cuts in 2026?",
-        "odds": 85.2,
-        "volume": 48977.3,
-        "is_hot": true,
-        "is_whale": false,
-        "link": "https://polymarket.com/event/how-many-fed-rate-cuts-in-2026?r=Axiomcom",
-        "rand_score": 9.317661905204144
-    },
-    {
-        "title": "Israel x Hamas Ceasefire Phase II by...?",
-        "odds": 24.5,
-        "volume": 2883.3,
-        "is_hot": true,
-        "is_whale": false,
-        "link": "https://polymarket.com/event/israel-x-hamas-ceasefire-phase-ii-by-october-31?r=Axiomcom",
-        "rand_score": 9.005790248044827
-    },
-    {
         "title": "Putin out as President of Russia by...?",
         "odds": 7.5,
-        "volume": 21160.6,
+        "volume": 21164.8,
         "is_hot": true,
         "is_whale": false,
         "link": "https://polymarket.com/event/putin-out-before-2027?r=Axiomcom",
-        "rand_score": 8.105654245386654
-    },
-    {
-        "title": "Ballon d'Or Winner 2026",
-        "odds": 7.1,
-        "volume": 29611.0,
-        "is_hot": true,
-        "is_whale": false,
-        "link": "https://polymarket.com/event/ballon-dor-winner-2026?r=Axiomcom",
-        "rand_score": 8.100663169058409
-    },
-    {
-        "title": "Aziz Akhannouch out as Morocco Prime Minister by December 31, 2026?",
-        "odds": 93.8,
-        "volume": 167.0,
-        "is_hot": true,
-        "is_whale": false,
-        "link": "https://polymarket.com/event/aziz-akhannouch-out-as-morocco-prime-minister-by-december-31-2026?r=Axiomcom",
-        "rand_score": 7.763575151670928
-    },
-    {
-        "title": "Los Angeles Mayoral Election",
-        "odds": 64.5,
-        "volume": 13418.4,
-        "is_hot": true,
-        "is_whale": false,
-        "link": "https://polymarket.com/event/los-angeles-mayoral-election-117?r=Axiomcom",
-        "rand_score": 6.840910018527633
-    },
-    {
-        "title": "Zelenskyy out as Ukraine president by end of 2026?",
-        "odds": 6.5,
-        "volume": 2990.1,
-        "is_hot": true,
-        "is_whale": false,
-        "link": "https://polymarket.com/event/zelenskyy-out-as-ukraine-president-before-2027?r=Axiomcom",
-        "rand_score": 6.80111216720963
+        "rand_score": 9.832093154802578
     },
     {
         "title": "Opensea FDV above ___ one day after launch?",
@@ -96,70 +15,16 @@
         "is_hot": true,
         "is_whale": false,
         "link": "https://polymarket.com/event/opensea-fdv-above-one-day-after-launch?r=Axiomcom",
-        "rand_score": 6.383134793811438
+        "rand_score": 9.137737108169082
     },
     {
-        "title": "Who will Bernie endorse?",
-        "odds": 45.0,
-        "volume": 183.3,
+        "title": "Ballon d'Or Winner 2026",
+        "odds": 7.1,
+        "volume": 29611.6,
         "is_hot": true,
         "is_whale": false,
-        "link": "https://polymarket.com/event/who-will-bernie-endorse?r=Axiomcom",
-        "rand_score": 6.358096246290704
-    },
-    {
-        "title": "Alabama Governor Election Winner",
-        "odds": 5.8,
-        "volume": 11.2,
-        "is_hot": true,
-        "is_whale": false,
-        "link": "https://polymarket.com/event/alabama-governor-winner-2026?r=Axiomcom",
-        "rand_score": 6.243393252853247
-    },
-    {
-        "title": "Israel x Hamas ceasefire cancelled by...?",
-        "odds": 16.0,
-        "volume": 4062.6,
-        "is_hot": true,
-        "is_whale": false,
-        "link": "https://polymarket.com/event/israel-x-hamas-ceasefire-cancelled-by-october-31?r=Axiomcom",
-        "rand_score": 5.736554247693924
-    },
-    {
-        "title": "Will Trump pardon Ghislaine Maxwell by end of 2026?",
-        "odds": 6.5,
-        "volume": 745.1,
-        "is_hot": true,
-        "is_whale": false,
-        "link": "https://polymarket.com/event/will-trump-pardon-ghislaine-maxwell?r=Axiomcom",
-        "rand_score": 5.366864463913262
-    },
-    {
-        "title": "Will Ukraine recapture Crimean territory by...?",
-        "odds": 6.5,
-        "volume": 3683.9,
-        "is_hot": true,
-        "is_whale": false,
-        "link": "https://polymarket.com/event/will-ukraine-recapture-crimean-territory-by-june-30-2026?r=Axiomcom",
-        "rand_score": 4.924968815341129
-    },
-    {
-        "title": "Will any presidential candidate win outright in the first round of the Brazil election?",
-        "odds": 10.0,
-        "volume": 142.9,
-        "is_hot": true,
-        "is_whale": false,
-        "link": "https://polymarket.com/event/will-any-presidential-candidate-win-outright-in-the-first-round-of-the-brazil-election?r=Axiomcom",
-        "rand_score": 4.243199899250319
-    },
-    {
-        "title": "Which party will win the House in 2026?",
-        "odds": 87.5,
-        "volume": 9506.9,
-        "is_hot": true,
-        "is_whale": false,
-        "link": "https://polymarket.com/event/which-party-will-win-the-house-in-2026?r=Axiomcom",
-        "rand_score": 3.4294021347091985
+        "link": "https://polymarket.com/event/ballon-dor-winner-2026?r=Axiomcom",
+        "rand_score": 8.631419326380161
     },
     {
         "title": "Hyperliquid airdrop by ....? ",
@@ -168,34 +33,7 @@
         "is_hot": true,
         "is_whale": false,
         "link": "https://polymarket.com/event/hyperliquid-airdop-by?r=Axiomcom",
-        "rand_score": 3.1536004997106093
-    },
-    {
-        "title": "MegaETH airdrop by...?",
-        "odds": 17.5,
-        "volume": 2646.8,
-        "is_hot": true,
-        "is_whale": false,
-        "link": "https://polymarket.com/event/megaeth-airdrop-by?r=Axiomcom",
-        "rand_score": 2.8779493556511424
-    },
-    {
-        "title": "Which party wins 2028 US Presidential Election?",
-        "odds": 41.5,
-        "volume": 2066.6,
-        "is_hot": true,
-        "is_whale": false,
-        "link": "https://polymarket.com/event/which-party-wins-2028-us-presidential-election?r=Axiomcom",
-        "rand_score": 2.3052705626611445
-    },
-    {
-        "title": "Presidential Election Winner 2028",
-        "odds": 20.2,
-        "volume": 689444.7,
-        "is_hot": true,
-        "is_whale": false,
-        "link": "https://polymarket.com/event/presidential-election-winner-2028?r=Axiomcom",
-        "rand_score": 2.217174611301067
+        "rand_score": 7.907130119290481
     },
     {
         "title": "Will Base launch a token by ___ ?",
@@ -204,7 +42,25 @@
         "is_hot": true,
         "is_whale": false,
         "link": "https://polymarket.com/event/will-base-launch-a-token-in-2025-341?r=Axiomcom",
-        "rand_score": 1.5807791641252167
+        "rand_score": 7.735022049370565
+    },
+    {
+        "title": "Alabama Governor Election Winner",
+        "odds": 5.8,
+        "volume": 11.2,
+        "is_hot": true,
+        "is_whale": false,
+        "link": "https://polymarket.com/event/alabama-governor-winner-2026?r=Axiomcom",
+        "rand_score": 7.671341357233329
+    },
+    {
+        "title": "Which party will win the Senate in 2026?",
+        "odds": 50.5,
+        "volume": 3943.1,
+        "is_hot": true,
+        "is_whale": false,
+        "link": "https://polymarket.com/event/which-party-will-win-the-senate-in-2026?r=Axiomcom",
+        "rand_score": 7.296508950823241
     },
     {
         "title": "Will Axiom launch a token by ___ ?",
@@ -213,7 +69,151 @@
         "is_hot": true,
         "is_whale": false,
         "link": "https://polymarket.com/event/will-axiom-launch-a-token-in-2025?r=Axiomcom",
-        "rand_score": 1.4899560458359096
+        "rand_score": 7.294068053281936
+    },
+    {
+        "title": "Zelenskyy out as Ukraine president by end of 2026?",
+        "odds": 6.5,
+        "volume": 2990.1,
+        "is_hot": true,
+        "is_whale": false,
+        "link": "https://polymarket.com/event/zelenskyy-out-as-ukraine-president-before-2027?r=Axiomcom",
+        "rand_score": 6.935431921702074
+    },
+    {
+        "title": "Which party will win the House in 2026?",
+        "odds": 87.5,
+        "volume": 9506.9,
+        "is_hot": true,
+        "is_whale": false,
+        "link": "https://polymarket.com/event/which-party-will-win-the-house-in-2026?r=Axiomcom",
+        "rand_score": 6.616612459842757
+    },
+    {
+        "title": "Balance of Power: 2026 Midterms",
+        "odds": 47.5,
+        "volume": 10146.9,
+        "is_hot": true,
+        "is_whale": false,
+        "link": "https://polymarket.com/event/balance-of-power-2026-midterms?r=Axiomcom",
+        "rand_score": 6.575414340957931
+    },
+    {
+        "title": "Israel x Hamas Ceasefire Phase II by...?",
+        "odds": 25.5,
+        "volume": 2883.3,
+        "is_hot": true,
+        "is_whale": false,
+        "link": "https://polymarket.com/event/israel-x-hamas-ceasefire-phase-ii-by-october-31?r=Axiomcom",
+        "rand_score": 6.456713245162408
+    },
+    {
+        "title": "Los Angeles Mayoral Election",
+        "odds": 64.5,
+        "volume": 13418.4,
+        "is_hot": true,
+        "is_whale": false,
+        "link": "https://polymarket.com/event/los-angeles-mayoral-election-117?r=Axiomcom",
+        "rand_score": 6.0512300605736975
+    },
+    {
+        "title": "Which party wins 2028 US Presidential Election?",
+        "odds": 41.5,
+        "volume": 2066.6,
+        "is_hot": true,
+        "is_whale": false,
+        "link": "https://polymarket.com/event/which-party-wins-2028-us-presidential-election?r=Axiomcom",
+        "rand_score": 5.822078762918736
+    },
+    {
+        "title": "How many Fed rate cuts in 2026?",
+        "odds": 85.2,
+        "volume": 48978.4,
+        "is_hot": true,
+        "is_whale": false,
+        "link": "https://polymarket.com/event/how-many-fed-rate-cuts-in-2026?r=Axiomcom",
+        "rand_score": 5.635848324607048
+    },
+    {
+        "title": "Democratic Presidential Nominee 2028",
+        "odds": 15.4,
+        "volume": 1262338.1,
+        "is_hot": true,
+        "is_whale": false,
+        "link": "https://polymarket.com/event/democratic-presidential-nominee-2028?r=Axiomcom",
+        "rand_score": 5.289714154426174
+    },
+    {
+        "title": "Israel x Hamas ceasefire cancelled by...?",
+        "odds": 16.0,
+        "volume": 4062.6,
+        "is_hot": true,
+        "is_whale": false,
+        "link": "https://polymarket.com/event/israel-x-hamas-ceasefire-cancelled-by-october-31?r=Axiomcom",
+        "rand_score": 5.182496177598665
+    },
+    {
+        "title": "Will Ukraine recapture Crimean territory by...?",
+        "odds": 6.5,
+        "volume": 3683.9,
+        "is_hot": true,
+        "is_whale": false,
+        "link": "https://polymarket.com/event/will-ukraine-recapture-crimean-territory-by-june-30-2026?r=Axiomcom",
+        "rand_score": 5.1244401081101145
+    },
+    {
+        "title": "US recession by end of 2026?",
+        "odds": 7.5,
+        "volume": 1708.7,
+        "is_hot": true,
+        "is_whale": false,
+        "link": "https://polymarket.com/event/us-recession-by-end-of-2026?r=Axiomcom",
+        "rand_score": 4.766384764494115
+    },
+    {
+        "title": "Who will Bernie endorse?",
+        "odds": 42.0,
+        "volume": 183.3,
+        "is_hot": true,
+        "is_whale": false,
+        "link": "https://polymarket.com/event/who-will-bernie-endorse?r=Axiomcom",
+        "rand_score": 4.682857481168188
+    },
+    {
+        "title": "Will any presidential candidate win outright in the first round of the Brazil election?",
+        "odds": 10.0,
+        "volume": 142.9,
+        "is_hot": true,
+        "is_whale": false,
+        "link": "https://polymarket.com/event/will-any-presidential-candidate-win-outright-in-the-first-round-of-the-brazil-election?r=Axiomcom",
+        "rand_score": 3.703143982928223
+    },
+    {
+        "title": "Aziz Akhannouch out as Morocco Prime Minister by December 31, 2026?",
+        "odds": 93.8,
+        "volume": 167.0,
+        "is_hot": true,
+        "is_whale": false,
+        "link": "https://polymarket.com/event/aziz-akhannouch-out-as-morocco-prime-minister-by-december-31-2026?r=Axiomcom",
+        "rand_score": 2.3009995496994726
+    },
+    {
+        "title": "MegaETH airdrop by...?",
+        "odds": 17.5,
+        "volume": 2646.8,
+        "is_hot": true,
+        "is_whale": false,
+        "link": "https://polymarket.com/event/megaeth-airdrop-by?r=Axiomcom",
+        "rand_score": 1.8166514892685681
+    },
+    {
+        "title": "Will Trump pardon Ghislaine Maxwell by end of 2026?",
+        "odds": 6.5,
+        "volume": 745.1,
+        "is_hot": true,
+        "is_whale": false,
+        "link": "https://polymarket.com/event/will-trump-pardon-ghislaine-maxwell?r=Axiomcom",
+        "rand_score": 0.7286965294689118
     },
     {
         "title": "Arizona Governor Election Winner",
@@ -222,52 +222,16 @@
         "is_hot": true,
         "is_whale": false,
         "link": "https://polymarket.com/event/arizona-governor-winner-2026?r=Axiomcom",
-        "rand_score": 1.3683214258775522
+        "rand_score": 0.38101367210019665
     },
     {
-        "title": "Which party will win the Senate in 2026?",
-        "odds": 51.5,
-        "volume": 3942.7,
+        "title": "Presidential Election Winner 2028",
+        "odds": 20.2,
+        "volume": 689446.7,
         "is_hot": true,
         "is_whale": false,
-        "link": "https://polymarket.com/event/which-party-will-win-the-senate-in-2026?r=Axiomcom",
-        "rand_score": 1.3450507573518211
-    },
-    {
-        "title": "Who will Trump endorse?",
-        "odds": 1.5,
-        "volume": 246.9,
-        "is_hot": false,
-        "is_whale": false,
-        "link": "https://polymarket.com/event/who-will-trump-endorse?r=Axiomcom",
-        "rand_score": 9.709315535481856
-    },
-    {
-        "title": "Will Trump resign by December 31, 2026?",
-        "odds": 3.0,
-        "volume": 527.8,
-        "is_hot": false,
-        "is_whale": false,
-        "link": "https://polymarket.com/event/will-trump-resign-by-december-31-2026?r=Axiomcom",
-        "rand_score": 9.654654171257803
-    },
-    {
-        "title": "Arkansas Governor Election Winner",
-        "odds": 0.8,
-        "volume": 11.0,
-        "is_hot": false,
-        "is_whale": false,
-        "link": "https://polymarket.com/event/arkansas-governor-winner-2026?r=Axiomcom",
-        "rand_score": 7.1976210348857705
-    },
-    {
-        "title": "OpenAI IPO Closing Market Cap",
-        "odds": 0.5,
-        "volume": 1979.9,
-        "is_hot": false,
-        "is_whale": false,
-        "link": "https://polymarket.com/event/openai-ipo-closing-market-cap?r=Axiomcom",
-        "rand_score": 6.379325511392308
+        "link": "https://polymarket.com/event/presidential-election-winner-2028?r=Axiomcom",
+        "rand_score": 0.13047067393436307
     },
     {
         "title": "Will Trump be impeached by end of 2026?",
@@ -276,34 +240,16 @@
         "is_hot": false,
         "is_whale": false,
         "link": "https://polymarket.com/event/will-trump-be-impeached-by-december-31-2026?r=Axiomcom",
-        "rand_score": 4.454360744156075
+        "rand_score": 9.980089524850898
     },
     {
-        "title": "Will China invade Taiwan by end of 2026?",
-        "odds": 3.9,
-        "volume": 39843.5,
+        "title": "Arkansas Governor Election Winner",
+        "odds": 0.8,
+        "volume": 11.0,
         "is_hot": false,
         "is_whale": false,
-        "link": "https://polymarket.com/event/will-china-invade-taiwan-before-2027?r=Axiomcom",
-        "rand_score": 4.432737929525889
-    },
-    {
-        "title": "Republican Presidential Nominee 2028",
-        "odds": 2.2,
-        "volume": 689113.6,
-        "is_hot": false,
-        "is_whale": false,
-        "link": "https://polymarket.com/event/republican-presidential-nominee-2028?r=Axiomcom",
-        "rand_score": 3.1049843112775246
-    },
-    {
-        "title": "Xi Jinping out before 2027?",
-        "odds": 4.2,
-        "volume": 12262.1,
-        "is_hot": false,
-        "is_whale": false,
-        "link": "https://polymarket.com/event/xi-jinping-out-before-2027?r=Axiomcom",
-        "rand_score": 2.2359587461069563
+        "link": "https://polymarket.com/event/arkansas-governor-winner-2026?r=Axiomcom",
+        "rand_score": 9.755422592527724
     },
     {
         "title": "Erdoğan out by December 31, 2026?",
@@ -312,16 +258,43 @@
         "is_hot": false,
         "is_whale": false,
         "link": "https://polymarket.com/event/erdoan-out-before-2027?r=Axiomcom",
-        "rand_score": 1.8406179456505378
+        "rand_score": 9.5945533105459
     },
     {
-        "title": "Which candidates will advance to Brazil's presidential runoff?",
-        "odds": 2.9,
-        "volume": 485.5,
+        "title": "Republican Presidential Nominee 2028",
+        "odds": 2.2,
+        "volume": 689114.3,
         "is_hot": false,
         "is_whale": false,
-        "link": "https://polymarket.com/event/which-candidates-will-advance-to-brazils-presidential-runoff?r=Axiomcom",
-        "rand_score": 1.3814297290581934
+        "link": "https://polymarket.com/event/republican-presidential-nominee-2028?r=Axiomcom",
+        "rand_score": 8.25795342956243
+    },
+    {
+        "title": "Who will Trump endorse?",
+        "odds": 1.5,
+        "volume": 246.9,
+        "is_hot": false,
+        "is_whale": false,
+        "link": "https://polymarket.com/event/who-will-trump-endorse?r=Axiomcom",
+        "rand_score": 6.657219301276892
+    },
+    {
+        "title": "OpenAI IPO Closing Market Cap",
+        "odds": 0.5,
+        "volume": 1979.9,
+        "is_hot": false,
+        "is_whale": false,
+        "link": "https://polymarket.com/event/openai-ipo-closing-market-cap?r=Axiomcom",
+        "rand_score": 5.904711338140932
+    },
+    {
+        "title": "Will Trump resign by December 31, 2026?",
+        "odds": 3.0,
+        "volume": 527.8,
+        "is_hot": false,
+        "is_whale": false,
+        "link": "https://polymarket.com/event/will-trump-resign-by-december-31-2026?r=Axiomcom",
+        "rand_score": 5.805139918239809
     },
     {
         "title": "Will Abstract launch a token by ___?",
@@ -330,6 +303,33 @@
         "is_hot": false,
         "is_whale": false,
         "link": "https://polymarket.com/event/will-abstract-launch-a-token-in-2025?r=Axiomcom",
-        "rand_score": 1.1761935198093831
+        "rand_score": 5.25589043623195
+    },
+    {
+        "title": "Will China invade Taiwan by end of 2026?",
+        "odds": 3.9,
+        "volume": 39844.3,
+        "is_hot": false,
+        "is_whale": false,
+        "link": "https://polymarket.com/event/will-china-invade-taiwan-before-2027?r=Axiomcom",
+        "rand_score": 4.341228144520248
+    },
+    {
+        "title": "Xi Jinping out before 2027?",
+        "odds": 4.2,
+        "volume": 12263.8,
+        "is_hot": false,
+        "is_whale": false,
+        "link": "https://polymarket.com/event/xi-jinping-out-before-2027?r=Axiomcom",
+        "rand_score": 3.8043381262715714
+    },
+    {
+        "title": "Which candidates will advance to Brazil's presidential runoff?",
+        "odds": 2.9,
+        "volume": 485.5,
+        "is_hot": false,
+        "is_whale": false,
+        "link": "https://polymarket.com/event/which-candidates-will-advance-to-brazils-presidential-runoff?r=Axiomcom",
+        "rand_score": 2.602869956926681
     }
 ]
